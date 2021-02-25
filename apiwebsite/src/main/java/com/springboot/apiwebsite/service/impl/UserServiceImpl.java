@@ -1,7 +1,7 @@
 package com.springboot.apiwebsite.service.impl;
 
-import com.springboot.apiwebsite.entity.User;
+import com.springboot.apiwebsite.entity.UserEntity;
 
 public interface UserServiceImpl {
-	User getFindUserName(String userName);
+	UserEntity getFindUserName(String userName);
 }

@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.springboot.apiwebsite.entity.User;
+import com.springboot.apiwebsite.entity.UserEntity;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService{
@@ -14,7 +14,7 @@ public class MyUserDetailsService implements UserDetailsService{
 	UserService userService;
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userService.getFindUserName(username);
+		UserEntity user = userService.getFindUserName(username);
 		if(user==null) {
 			throw new UsernameNotFoundException(username);
 		}

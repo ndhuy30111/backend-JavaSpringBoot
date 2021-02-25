@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.springboot.apiwebsite.entity.User;
+import com.springboot.apiwebsite.entity.UserEntity;
 
 
 public class MyUserDetails implements UserDetails{
@@ -15,9 +15,9 @@ public class MyUserDetails implements UserDetails{
 	 */
 	private static final long serialVersionUID = 1L;
 	@Autowired
-	private User user;
+	private UserEntity user;
 	
-	public MyUserDetails(User user) {
+	public MyUserDetails(UserEntity user) {
 		this.user = user;
 	}
 	@Override

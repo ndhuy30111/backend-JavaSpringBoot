@@ -1,6 +1,9 @@
 package com.springboot.apiwebsite.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -10,13 +13,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.apiwebsite.entity.UserEntity;
 import com.springboot.apiwebsite.model.AuthenticationRequest;
 import com.springboot.apiwebsite.model.AuthenticationResponse;
+import com.springboot.apiwebsite.repository.EntityRepository;
 import com.springboot.apiwebsite.service.MyUserDetailsService;
 import com.springboot.apiwebsite.util.JwtUtil;
 
 
-@RestController(value = "api")
+@RestController
 public class AuthenticationController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -24,7 +29,9 @@ public class AuthenticationController {
 	private MyUserDetailsService myUserDetailsService;
 	@Autowired
 	private JwtUtil jwtTokenUtil;
-	@PostMapping(value = "Authentication")
+	@Autowired
+	private EntityRepository entityRepository;
+	@PostMapping(value = "api/Authentication")
 	public ResponseEntity<?>createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)throws Exception{
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(), authenticationRequest.getPassword()));
@@ -35,5 +42,9 @@ public class AuthenticationController {
 		final UserDetails userDetails = myUserDetailsService.loadUserByUsername(authenticationRequest.getUserName());
 		final String jwt = jwtTokenUtil.generateToken(userDetails);
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
+	}
+	@PostMapping("api/dangky")
+	public ResponseEntity<?>createUser(@Valid @RequestBody UserEntity user){
+		return new ResponseEntity<>(entityRepository.save(user),HttpStatus.OK);
 	}
 }
