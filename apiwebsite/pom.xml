@@ -12,6 +12,7 @@
 	<artifactId>apiwebsite</artifactId>
 	<version>v0.1</version>
 	<name>apiwebsite</name>
+
 	<description>cuoi ki Xay dung website</description>
 	<properties>
 		<java.version>1.8</java.version>
@@ -79,6 +80,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -87,6 +89,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+				<executable>true</executable>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
