@@ -44,7 +44,14 @@ public class AuthenticationController {
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
 	@PostMapping("api/dangky")
-	public ResponseEntity<?>createUser(@Valid @RequestBody UserEntity user){
-		return new ResponseEntity<>(entityRepository.save(user),HttpStatus.OK);
+	public ResponseEntity<?>createUser(@Valid @RequestBody UserEntity user) throws Exception{
+		try {
+			UserEntity userEntityNew =entityRepository.save(user);
+			
+			return new ResponseEntity<>(userEntityNew,HttpStatus.CREATED);	
+		}catch(Exception e) {
+			throw new Exception("Lỗi sai mật khẩu");
+		}
+		
 	}
 }

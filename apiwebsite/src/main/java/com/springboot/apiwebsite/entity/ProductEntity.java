@@ -29,7 +29,32 @@ public class ProductEntity extends UrlEntitySuper{
 	@JoinTable(name="catergory_product",joinColumns = @JoinColumn(name="catergory_id"),
 	inverseJoinColumns = @JoinColumn (name="product_id"))
 	private List<CatergoryEntity> catergory;
+	@OneToMany(mappedBy = "product")
+	private List<InvoiceDetailsEntity> invoiceDetails;
+
 	
+	
+	
+	public String getShortIntroduction() {
+		return shortIntroduction;
+	}
+	public void setShortIntroduction(String shortIntroduction) {
+		this.shortIntroduction = shortIntroduction;
+	}
+	public List<ColorEntity> getColor() {
+		return color;
+	}
+	public void setColor(List<ColorEntity> color) {
+		this.color = color;
+	}
+	public List<CatergoryEntity> getCatergory() {
+		return catergory;
+	}
+	public void setCatergory(List<CatergoryEntity> catergory) {
+		this.catergory = catergory;
+	}
+
+
 	public Long getPrice() {
 		return price;
 	}

@@ -1,7 +1,10 @@
 package com.springboot.apiwebsite.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -16,7 +19,8 @@ public class UserEntity extends BasicEntitySuper{
 	private String password;
 	@Column(name="email")
 	private String email;
-	
+	@OneToMany(mappedBy = "user")
+	private List<InvoiceEntity> invoice;
 
 	public String getUserName() {
 		return userName;

@@ -92,7 +92,6 @@
 						<exclude>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
-							<executable>true</executable>
 						</exclude>
 					</excludes>
 				</configuration>

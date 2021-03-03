@@ -1,6 +1,7 @@
 package com.springboot.apiwebsite.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.springboot.apiwebsite.entity.UserEntity;
@@ -17,6 +18,13 @@ public class UserService implements UserServiceImpl{
 			return entityRepository.findByUserName(userName);
 		}
 		return null;
+	}
+	@Override
+	public UserEntity saveUser(UserEntity userEntity) {
+		BCryptPasswordEncoder bcry = new BCryptPasswordEncoder();
+		String passwordnew =  bcry.encode(userEntity.getPassword());
+		userEntity.setPassword(passwordnew);
+		return entityRepository.save(userEntity);
 	}
 
 }
