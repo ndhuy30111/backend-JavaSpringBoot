@@ -1,5 +1,6 @@
 package com.springboot.apiwebsite.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,7 +12,7 @@ public class ImageEntity extends UrlEntitySuper{
 	@ManyToOne
 	@JoinColumn(name="color_id")
 	private ColorEntity color;
-
+	
 	public ColorEntity getColor() {
 		return color;
 	}

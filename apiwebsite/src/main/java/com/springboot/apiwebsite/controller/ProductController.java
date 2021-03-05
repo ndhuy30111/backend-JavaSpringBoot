@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.apiwebsite.entity.ProductEntity;
 import com.springboot.apiwebsite.service.ProductService;
 
@@ -24,9 +28,11 @@ public class ProductController {
 		return new ResponseEntity<>(productService.getAll(page, size),HttpStatus.OK);
 	}
 	@PostMapping
-	public ResponseEntity<?> save(@RequestBody ProductEntity productEntity)throws Exception{
+	
+	public ResponseEntity<?> save(@RequestParam("product") String product,@RequestParam(name = "file",required = false) MultipartFile file)throws Exception{
 		try {
-			return new ResponseEntity<>(productService.save(productEntity),HttpStatus.CREATED);	
+			ProductEntity productEntity = new ObjectMapper().readValue(product,ProductEntity.class);
+			return new ResponseEntity<>(productEntity,HttpStatus.CREATED);	
 		}catch(Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
