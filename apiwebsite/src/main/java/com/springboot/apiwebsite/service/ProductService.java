@@ -15,16 +15,11 @@ import com.springboot.apiwebsite.util.SlugUtil;
 public class ProductService implements ProductServiceImpl{
 	@Autowired
 	private ProductRepository productRepository;
-	@Override
-	public List<ProductEntity> getAll() {
-		return productRepository.findAll();
-	}
 
 	@Override
-	public List<ProductEntity> getAll(int page,int size) {
+	public List<ProductEntity> findPage(int page,int size) {
 		Pageable paging = PageRequest.of(page, size);
 		return productRepository.findAll(paging).getContent();
-		
 	}
 
 	@Override
@@ -32,5 +27,30 @@ public class ProductService implements ProductServiceImpl{
 		productEntity.setUrl(SlugUtil.makeSlug(productEntity.getName()));
 		return productRepository.save(productEntity);
 	}
+
+	@Override
+	public List<ProductEntity> findAll() {	
+		 return productRepository.findAll();
+	}
+
+	@Override
+	public List<ProductEntity> findById(Long id) {
+		return null;
+	}
+
+	@Override
+	public void remove(Long id) {
+		productRepository.deleteById(id);
+	}
+
+	@Override
+	public ProductEntity findUrl(String url) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
 	
 }

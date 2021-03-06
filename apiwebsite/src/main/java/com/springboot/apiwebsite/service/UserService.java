@@ -1,5 +1,7 @@
 package com.springboot.apiwebsite.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,11 +22,26 @@ public class UserService implements UserServiceImpl{
 		return null;
 	}
 	@Override
-	public UserEntity saveUser(UserEntity userEntity) {
+	public UserEntity save(UserEntity userEntity) {
 		BCryptPasswordEncoder bcry = new BCryptPasswordEncoder();
 		String passwordnew =  bcry.encode(userEntity.getPassword());
 		userEntity.setPassword(passwordnew);
 		return entityRepository.save(userEntity);
+	}
+	@Override
+	public List<UserEntity> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<UserEntity> findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void remove(Long id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

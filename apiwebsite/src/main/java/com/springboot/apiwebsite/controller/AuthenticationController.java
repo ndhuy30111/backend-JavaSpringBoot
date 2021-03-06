@@ -31,7 +31,7 @@ public class AuthenticationController {
 	private JwtUtil jwtTokenUtil;
 	@Autowired
 	private EntityRepository entityRepository;
-	@PostMapping(value = "api/Authentication")
+	@PostMapping(value = "/api/Authentication")
 	public ResponseEntity<?>createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)throws Exception{
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(), authenticationRequest.getPassword()));
@@ -43,7 +43,7 @@ public class AuthenticationController {
 		final String jwt = jwtTokenUtil.generateToken(userDetails);
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
-	@PostMapping("api/dangky")
+	@PostMapping("/api/dangky")
 	public ResponseEntity<?>createUser(@Valid @RequestBody UserEntity user) throws Exception{
 		try {
 			UserEntity userEntityNew =entityRepository.save(user);

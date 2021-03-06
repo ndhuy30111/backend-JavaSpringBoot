@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.springboot.apiwebsite.entity.ProductEntity;
 
-public interface ProductServiceImpl {
-	public List<ProductEntity> getAll();
-	public List<ProductEntity> getAll(int page,int size);
-	ProductEntity save(ProductEntity productEntity);
+public interface ProductServiceImpl extends GeneralService<ProductEntity>{
+	public List<ProductEntity> findPage(int page,int size);
+	public ProductEntity findUrl(String url);
+	
 }

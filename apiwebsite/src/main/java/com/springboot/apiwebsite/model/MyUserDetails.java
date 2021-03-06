@@ -1,4 +1,4 @@
-package com.springboot.apiwebsite.service;
+package com.springboot.apiwebsite.model;
 
 import java.util.Collection;
 

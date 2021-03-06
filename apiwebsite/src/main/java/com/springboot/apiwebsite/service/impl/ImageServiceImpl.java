@@ -6,14 +6,8 @@ import java.util.stream.Stream;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
-public interface ImageServiceImpl {
-	  public void init();
+import com.springboot.apiwebsite.entity.ImageEntity;
 
-	  public void save(MultipartFile file);
+public interface ImageServiceImpl extends GeneralService<ImageEntity>{
 
-	  public Resource load(String filename);
-
-	  public void deleteAll();
-
-	  public Stream<Path> loadAll();
 }	
