@@ -21,7 +21,7 @@ public class ProductEntity extends UrlEntitySuper{
 	private Long discount;
 	@Column(name="shortIntroduction",nullable = true)
 	private String shortIntroduction;
-	@Column(name="Introduce")
+	@Column(name="introduce")
 	private String introduce;
 	@OneToMany(mappedBy = "product")
 	private List<ColorEntity> color;

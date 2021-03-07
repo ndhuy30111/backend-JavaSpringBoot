@@ -1,11 +1,15 @@
 package com.springboot.apiwebsite.service;
 
+import java.sql.SQLException;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.springboot.apiwebsite.entity.ProductEntity;
 import com.springboot.apiwebsite.repository.ProductRepository;
@@ -22,10 +26,17 @@ public class ProductService implements ProductServiceImpl{
 		return productRepository.findAll(paging).getContent();
 	}
 
+	@Transactional
 	@Override
-	public ProductEntity save(ProductEntity productEntity) {
-		productEntity.setUrl(SlugUtil.makeSlug(productEntity.getName()));
-		return productRepository.save(productEntity);
+	public ProductEntity save(@Valid ProductEntity productEntity) throws SQLException {
+		try {
+			productEntity.setUrl(SlugUtil.makeSlug(productEntity.getName()));
+			ProductEntity productNew=  productRepository.save(productEntity);	
+			return productNew;
+		}catch(Exception e) {
+			throw new SQLException("Loi ko them dc");
+		}
+		
 	}
 
 	@Override

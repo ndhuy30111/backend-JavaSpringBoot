@@ -9,4 +9,8 @@ public class DocumentController {
 	public String index() {
 		return "index";
 	}
+	@GetMapping(value="/product")
+	public String documentProduct() {
+		return "product";
+	}
 }

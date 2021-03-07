@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -11,4 +12,6 @@ import javax.persistence.Table;
 public class CatergoryEntity extends UrlEntitySuper{
 	@ManyToMany(mappedBy = "catergory")
 	private List<ProductEntity> product;
+	@OneToMany
+	private List<CatergoryEntity> listcate;
 }
