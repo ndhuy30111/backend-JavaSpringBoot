@@ -17,7 +17,7 @@ public class ColorEntity extends UrlEntitySuper{
 	@OneToMany(mappedBy = "color")
 	private List<SizeEntity> size;
 	@OneToMany(mappedBy = "color")
-	private List<ImageEntity> image;
+	private List<UploadFileEntity> image;
 	public ProductEntity getProduct() {
 		return product;
 	}
@@ -30,10 +30,10 @@ public class ColorEntity extends UrlEntitySuper{
 	public void setSize(List<SizeEntity> size) {
 		this.size = size;
 	}
-	public List<ImageEntity> getImage() {
+	public List<UploadFileEntity> getImage() {
 		return image;
 	}
-	public void setImage(List<ImageEntity> image) {
+	public void setImage(List<UploadFileEntity> image) {
 		this.image = image;
 	}
 	

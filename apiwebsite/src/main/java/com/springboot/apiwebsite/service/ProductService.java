@@ -2,6 +2,9 @@ package com.springboot.apiwebsite.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +26,8 @@ public class ProductService implements ProductServiceImpl{
 	}
 
 	@Override
-	public ProductEntity save(ProductEntity productEntity) {
+	@Transactional
+	public ProductEntity save(@Valid ProductEntity productEntity) {
 		productEntity.setUrl(SlugUtil.makeSlug(productEntity.getName()));
 		return productRepository.save(productEntity);
 	}

@@ -11,6 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
 import com.springboot.apiwebsite.filter.JwtRequestFilter;
 import com.springboot.apiwebsite.service.MyUserDetailsService;
@@ -32,9 +33,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 		.authorizeRequests().antMatchers("api/Authentication").permitAll()
-		
 		.and().sessionManagement()
-		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().cors().disable();
 		http.addFilterBefore(jwtRequestFilter,UsernamePasswordAuthenticationFilter.class);
 	}
 	@Bean
@@ -45,5 +45,5 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 }
