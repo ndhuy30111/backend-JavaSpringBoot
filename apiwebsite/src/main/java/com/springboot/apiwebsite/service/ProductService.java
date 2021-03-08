@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.springboot.apiwebsite.entity.ColorEntity;
 import com.springboot.apiwebsite.entity.ProductEntity;
 import com.springboot.apiwebsite.repository.ProductRepository;
 import com.springboot.apiwebsite.service.impl.ProductServiceImpl;
@@ -29,6 +30,7 @@ public class ProductService implements ProductServiceImpl{
 	@Transactional
 	public ProductEntity save(@Valid ProductEntity productEntity) {
 		productEntity.setUrl(SlugUtil.makeSlug(productEntity.getName()));
+
 		return productRepository.save(productEntity);
 	}
 
@@ -51,6 +53,12 @@ public class ProductService implements ProductServiceImpl{
 	public ProductEntity findUrl(String url) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public ProductEntity findByIdOne(Long id) {
+		// TODO Auto-generated method stub
+		return productRepository.getOne(id);
 	}
 
 

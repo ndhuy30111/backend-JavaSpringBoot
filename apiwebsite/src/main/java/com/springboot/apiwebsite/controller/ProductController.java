@@ -1,5 +1,9 @@
 package com.springboot.apiwebsite.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 import javax.validation.valueextraction.ValueExtractorDeclarationException;
@@ -19,8 +23,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springboot.apiwebsite.entity.ColorEntity;
 import com.springboot.apiwebsite.entity.ProductEntity;
+import com.springboot.apiwebsite.entity.SizeEntity;
+import com.springboot.apiwebsite.repository.ProductRepository;
+import com.springboot.apiwebsite.service.ColorService;
 import com.springboot.apiwebsite.service.ProductService;
+import com.springboot.apiwebsite.service.SizeService;
+import com.springboot.apiwebsite.service.impl.ColorServiceImpl;
+
 
 @RestController
 @CrossOrigin
@@ -28,7 +39,10 @@ import com.springboot.apiwebsite.service.ProductService;
 public class ProductController {
 	@Autowired
 	private ProductService productService;
-
+	@Autowired
+	private ColorService colorService;
+	@Autowired
+	private SizeService sizeService;
 	@GetMapping
 	public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "5") int size) {
@@ -36,16 +50,28 @@ public class ProductController {
 	}
 
 	@PostMapping
+	@Transactional
 	public ResponseEntity<?> save(@Valid @RequestParam(value = "product") String product,
 			@RequestParam(name = "file", required = false) MultipartFile file)
 			throws Exception, ValidationException, ValidationException {
 		try {
 			ProductEntity productEntity = new ObjectMapper().readValue(product, ProductEntity.class);
-			ProductEntity productSave = productService.save(productEntity);
-			return new ResponseEntity<>(productSave, HttpStatus.CREATED);
+			
+			ProductEntity productnew = productService.save(productEntity);
+			for(ColorEntity itemColor : productnew.getColor()) {
+				itemColor.setProduct(productnew);
+				ColorEntity colorNew = colorService.save(itemColor);
+				for(SizeEntity itemSize : colorNew.getSize()) {
+					itemSize.setColor(colorNew);
+					sizeService.save(itemSize);
+				}
+			}	
+			return new ResponseEntity<>(productEntity,HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 
 		}
 	}
+
+
 }

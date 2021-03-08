@@ -1,0 +1,12 @@
+package com.springboot.apiwebsite.service.impl;
+
+import org.springframework.data.jpa.repository.Query;
+
+import com.springboot.apiwebsite.entity.SizeEntity;
+
+public interface SizeServiceImpl extends GeneralService<SizeEntity>{
+	
+	@Query(name=" Select s from Size s where s.productUrl = productUrl and s.colorName =colorName and s.sizeName = sizeName ",nativeQuery = true)
+	SizeEntity findSize(String productUrl,String colorName,String sizeName);
+
+}

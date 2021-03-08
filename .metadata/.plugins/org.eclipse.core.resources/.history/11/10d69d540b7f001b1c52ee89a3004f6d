@@ -1,0 +1,8 @@
+package com.springboot.apiwebsite.repository;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ColorReponsitory<ColorEntity> extends JpaReponsitory<ColorEntity> {
+
+}

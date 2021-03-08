@@ -43,5 +43,10 @@ public class UserService implements UserServiceImpl{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public UserEntity findByIdOne(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

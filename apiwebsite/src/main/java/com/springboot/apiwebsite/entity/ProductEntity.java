@@ -1,9 +1,13 @@
 package com.springboot.apiwebsite.entity;
 
+import java.awt.Color;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -23,7 +27,7 @@ public class ProductEntity extends UrlEntitySuper{
 	private String shortIntroduction;
 	@Column(name="Introduce")
 	private String introduce;
-	@OneToMany(mappedBy = "product")
+	@OneToMany(targetEntity = ColorEntity.class,mappedBy  = "product",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ColorEntity> color;
 	@ManyToMany
 	@JoinTable(name="catergory_product",joinColumns = @JoinColumn(name="catergory_id"),
@@ -31,10 +35,16 @@ public class ProductEntity extends UrlEntitySuper{
 	private List<CatergoryEntity> catergory;
 	@OneToMany(mappedBy = "product")
 	private List<InvoiceDetailsEntity> invoiceDetails;
+	public List<InvoiceDetailsEntity> getInvoiceDetails() {
+		return invoiceDetails;
+	}
+	public void setInvoiceDetails(List<InvoiceDetailsEntity> invoiceDetails) {
+		this.invoiceDetails = invoiceDetails;
+	}
+	public void setColor(List<ColorEntity> color) {
+		this.color = color;
+	}
 
-	
-	
-	
 	public String getShortIntroduction() {
 		return shortIntroduction;
 	}
@@ -43,9 +53,6 @@ public class ProductEntity extends UrlEntitySuper{
 	}
 	public List<ColorEntity> getColor() {
 		return color;
-	}
-	public void setColor(List<ColorEntity> color) {
-		this.color = color;
 	}
 	public List<CatergoryEntity> getCatergory() {
 		return catergory;

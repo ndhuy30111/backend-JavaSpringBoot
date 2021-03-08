@@ -1,0 +1,12 @@
+package com.springboot.apiwebsite.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.springboot.apiwebsite.entity.ImageEntity;
+
+@Repository
+public interface ImageRepository extends JpaRepository<ImageEntity, Long>{
+            public List<ImageEntity> findAll();
+            public List<ImageEntity> findById(long id);
+            public List<ImageEntity> save();
+}
