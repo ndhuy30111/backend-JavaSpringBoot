@@ -8,4 +8,5 @@ import com.springboot.apiwebsite.entity.UserEntity;
 @Repository
 public interface EntityRepository extends JpaRepository<UserEntity, Long>{
 	UserEntity findByUserName(String userName);
+	
 }

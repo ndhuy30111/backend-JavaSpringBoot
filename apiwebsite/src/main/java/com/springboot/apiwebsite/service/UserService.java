@@ -1,5 +1,6 @@
 package com.springboot.apiwebsite.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.springboot.apiwebsite.entity.UserEntity;
+import com.springboot.apiwebsite.model.UserDto;
+import com.springboot.apiwebsite.model.UserMapper;
 import com.springboot.apiwebsite.repository.EntityRepository;
 import com.springboot.apiwebsite.service.impl.UserServiceImpl;
 
@@ -14,6 +17,7 @@ import com.springboot.apiwebsite.service.impl.UserServiceImpl;
 public class UserService implements UserServiceImpl{
 	@Autowired
 	EntityRepository entityRepository;
+	
 	@Override
 	public UserEntity getFindUserName(String userName) {
 		if(userName != null) {
@@ -31,12 +35,12 @@ public class UserService implements UserServiceImpl{
 	@Override
 	public List<UserEntity> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return entityRepository.findAll();
 	}
 	@Override
 	public List<UserEntity> findById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return entityRepository.findAll();
 	}
 	@Override
 	public void remove(Long id) {
@@ -48,5 +52,8 @@ public class UserService implements UserServiceImpl{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+		
+	
 
 }

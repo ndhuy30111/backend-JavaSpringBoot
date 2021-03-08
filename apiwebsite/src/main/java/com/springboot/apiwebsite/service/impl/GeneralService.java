@@ -8,4 +8,5 @@ public interface GeneralService <T>{
 	T findByIdOne(Long id);
 	T save(T t);
 	void remove (Long id);
+	
 }
