@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
     <fullyQualifiedTypeName name="com.springboot.apiwebsite.entity.CatergoryEntity"/>
     <fullyQualifiedTypeName name="com.springboot.apiwebsite.repository.ImageRepository"/>
     <fullyQualifiedTypeName name="com.springboot.apiwebsite.service.impl.ImageServiceImpl"/>
@@ -11,7 +10,6 @@
     <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
     <fullyQualifiedTypeName name="com.springboot.apiwebsite.repository.SizeReponsitory"/>
     <fullyQualifiedTypeName name="com.springboot.apiwebsite.repository.ColorReponsitory"/>
-    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
     <fullyQualifiedTypeName name="com.springboot.apiwebsite.service.impl.ProductServiceImpl"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
@@ -43,14 +41,23 @@
     <fullyQualifiedTypeName name="com.springboot.apiwebsite.service.impl.SizeServiceImpl"/>
     <fullyQualifiedTypeName name="com.springboot.apiwebsite.repository.SizeRepository"/>
     <fullyQualifiedTypeName name="com.springboot.apiwebsite.service.SizeService"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="javax.transaction.Transactional"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
-    <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonBackReference"/>
     <fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
     <fullyQualifiedTypeName name="antlr.collections.List"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="com.springboot.apiwebsite.entity.ProductEntity"/>
     <fullyQualifiedTypeName name="com.springboot.apiwebsite.entity.ColorEntity"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
+    <fullyQualifiedTypeName name="org.hibernate.validator.constraints.UniqueElements"/>
+    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="com.springboot.apiwebsite.model.UserMapper"/>
+    <fullyQualifiedTypeName name="com.springboot.apiwebsite.entity.UserEntity"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.springboot.apiwebsite.service.UserService"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.springboot.apiwebsite.model.UserDto"/>
+    <fullyQualifiedTypeName name="com.springboot.apiwebsite.entity.BasicEntitySuper"/>
+    <fullyQualifiedTypeName name="com.springboot.apiwebsite.repository.EntityRepository"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonBackReference"/>
 </qualifiedTypeNameHistroy>

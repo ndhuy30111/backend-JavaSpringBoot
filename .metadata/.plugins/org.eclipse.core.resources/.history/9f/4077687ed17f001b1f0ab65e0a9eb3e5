@@ -1,0 +1,10 @@
+package com.springboot.apiwebsite.model;
+
+import com.example.demo.model.dto.UserDTO;
+import com.springboot.apiwebsite.entity.UserEntity;
+
+public class UserMapper {
+	
+
+
+}

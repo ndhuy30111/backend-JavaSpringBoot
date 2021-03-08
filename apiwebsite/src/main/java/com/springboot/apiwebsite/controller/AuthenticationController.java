@@ -1,7 +1,5 @@
 package com.springboot.apiwebsite.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springboot.apiwebsite.entity.UserEntity;
 import com.springboot.apiwebsite.model.AuthenticationRequest;
 import com.springboot.apiwebsite.model.AuthenticationResponse;
-import com.springboot.apiwebsite.model.UserDto;
 import com.springboot.apiwebsite.repository.EntityRepository;
 import com.springboot.apiwebsite.service.MyUserDetailsService;
 import com.springboot.apiwebsite.service.UserService;
@@ -30,8 +27,6 @@ import com.springboot.apiwebsite.util.JwtUtil;
 @RestController
 @CrossOrigin
 public class AuthenticationController {
-	@Autowired
-	private UserService userService;
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	@Autowired 
