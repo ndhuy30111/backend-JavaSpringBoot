@@ -1,0 +1,5 @@
+package com.springboot.apiwebsite.service.impl;
+
+public class SizeService {
+
+}

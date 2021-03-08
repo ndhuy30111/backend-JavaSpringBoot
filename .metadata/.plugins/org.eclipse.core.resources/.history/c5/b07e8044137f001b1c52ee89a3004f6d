@@ -1,0 +1,14 @@
+package com.springboot.apiwebsite.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.springboot.apiwebsite.entity.SizeEntity;
+
+@Repository
+public interface SizeReponsitory extends JpaRepository<SizeEntity, Long>{
+	
+	@Query(name=" Select s from Size s where s.productUrl = ?1 and s.colorName = ?2 and s.sizeName = ?3 ",nativeQuery = true)
+	public	SizeEntity findsize(String productUrl, String colorName, String sizeName);
+}

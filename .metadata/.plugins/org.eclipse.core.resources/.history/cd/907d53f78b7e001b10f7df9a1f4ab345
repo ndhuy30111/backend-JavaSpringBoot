@@ -1,0 +1,5 @@
+package com.springboot.apiwebsite.repository;
+
+public class ColorRepository extends JpaRepository<ColorEntity > {
+
+}
