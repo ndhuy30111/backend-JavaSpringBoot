@@ -1,6 +1,5 @@
 package com.springboot.apiwebsite.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +7,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.springboot.apiwebsite.entity.UserEntity;
-import com.springboot.apiwebsite.model.UserDto;
-import com.springboot.apiwebsite.model.UserMapper;
 import com.springboot.apiwebsite.repository.EntityRepository;
 import com.springboot.apiwebsite.service.impl.UserServiceImpl;
 

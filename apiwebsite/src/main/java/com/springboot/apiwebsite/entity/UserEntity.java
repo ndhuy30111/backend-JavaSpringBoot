@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.UniqueElements;
@@ -16,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "user")
 public class UserEntity extends BasicEntitySuper{
 	
-	@Column(name = "username",length = 50)
+	@Column(name = "username",length = 50,unique = true)
 	@NotNull(message = "Bạn không được để null Username")
 	private String userName;
 	@JsonBackReference
