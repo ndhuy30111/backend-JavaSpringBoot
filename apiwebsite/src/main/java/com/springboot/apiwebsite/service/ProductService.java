@@ -1,6 +1,7 @@
 package com.springboot.apiwebsite.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -58,10 +59,10 @@ public class ProductService implements ProductServiceImpl{
 	@Override
 	public ProductEntity findByIdOne(Long id) {
 		// TODO Auto-generated method stub
-		return productRepository.getOne(id);
+		return productRepository.findById(id).get();
 	}
 
-
+	
 
 
 	

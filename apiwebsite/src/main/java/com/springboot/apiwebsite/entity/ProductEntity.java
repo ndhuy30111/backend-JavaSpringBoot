@@ -1,6 +1,7 @@
 package com.springboot.apiwebsite.entity;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -29,15 +30,16 @@ public class ProductEntity extends UrlEntitySuper{
 	private String introduce;
 	@OneToMany(targetEntity = ColorEntity.class,mappedBy  = "product",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ColorEntity> color;
-	@ManyToMany
-	@JoinTable(name="catergory_product",joinColumns = @JoinColumn(name="catergory_id"),
-	inverseJoinColumns = @JoinColumn (name="product_id"))
-	private List<CatergoryEntity> catergory;
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinTable(name="catergory_product",joinColumns = @JoinColumn(name="product_id"),
+	inverseJoinColumns = @JoinColumn (name="catergory_id"))
+	private List<CatergoryEntity> catergory = new ArrayList<>();
 	@OneToMany(mappedBy = "product")
 	private List<InvoiceDetailsEntity> invoiceDetails;
 	public List<InvoiceDetailsEntity> getInvoiceDetails() {
 		return invoiceDetails;
 	}
+	
 	public void setInvoiceDetails(List<InvoiceDetailsEntity> invoiceDetails) {
 		this.invoiceDetails = invoiceDetails;
 	}

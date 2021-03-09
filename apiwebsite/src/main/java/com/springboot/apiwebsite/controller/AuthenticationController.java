@@ -57,7 +57,7 @@ public class AuthenticationController {
 			
 			return new ResponseEntity<>(userEntityNew,HttpStatus.CREATED);	
 		}catch(Exception e) {
-			throw new Exception("Lỗi sai mật khẩu");
+			throw new Exception("Trung ten");
 		}
 		
 	}
