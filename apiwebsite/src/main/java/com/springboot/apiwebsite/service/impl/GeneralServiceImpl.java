@@ -2,7 +2,7 @@ package com.springboot.apiwebsite.service.impl;
 
 import java.util.List;
 
-public interface GeneralService <T>{
+public interface GeneralServiceImpl <T>{
 	List<T> findAll();
 	List<T> findById(Long id);
 	T findByIdOne(Long id);

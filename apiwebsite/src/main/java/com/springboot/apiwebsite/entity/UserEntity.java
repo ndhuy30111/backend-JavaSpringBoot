@@ -8,6 +8,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "user")
 public class UserEntity extends BasicEntitySuper{
@@ -16,12 +18,25 @@ public class UserEntity extends BasicEntitySuper{
 	@NotNull(message = "Bạn không được để null Username")
 	private String userName;
 	@Column(name="password")
+	@JsonBackReference
 	private String password;
 	@Column(name="email")
 	private String email;
 	@OneToMany(mappedBy = "user")
 	private List<InvoiceEntity> invoice;
 
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public List<InvoiceEntity> getInvoice() {
+		return invoice;
+	}
+	public void setInvoice(List<InvoiceEntity> invoice) {
+		this.invoice = invoice;
+	}
 	public String getUserName() {
 		return userName;
 	}

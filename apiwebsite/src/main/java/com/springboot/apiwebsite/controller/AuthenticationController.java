@@ -10,6 +10,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ import com.springboot.apiwebsite.model.AuthenticationRequest;
 import com.springboot.apiwebsite.model.AuthenticationResponse;
 import com.springboot.apiwebsite.repository.EntityRepository;
 import com.springboot.apiwebsite.service.MyUserDetailsService;
+import com.springboot.apiwebsite.service.UserService;
 import com.springboot.apiwebsite.util.JwtUtil;
 
 
@@ -32,7 +34,7 @@ public class AuthenticationController {
 	@Autowired
 	private JwtUtil jwtTokenUtil;
 	@Autowired
-	private EntityRepository entityRepository;
+	private UserService userService;
 	@PostMapping(value = "/api/Authentication")
 	public ResponseEntity<?>createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)throws Exception{
 		try {
@@ -48,12 +50,14 @@ public class AuthenticationController {
 	@PostMapping("/api/dangky")
 	public ResponseEntity<?>createUser(@Valid @RequestBody UserEntity user) throws Exception{
 		try {
-			UserEntity userEntityNew =entityRepository.save(user);
-			
+			UserEntity userEntityNew = userService.save(user);
 			return new ResponseEntity<>(userEntityNew,HttpStatus.CREATED);	
 		}catch(Exception e) {
 			throw new Exception("Lỗi sai mật khẩu");
 		}
-		
+	}
+	@GetMapping("/api/account")
+	public ResponseEntity<?>getUser(){
+		return new ResponseEntity<>(userService.findAll(),HttpStatus.OK);
 	}
 }

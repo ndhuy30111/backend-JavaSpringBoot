@@ -25,13 +25,13 @@ public class UserService implements UserServiceImpl{
 	public UserEntity save(UserEntity userEntity) {
 		BCryptPasswordEncoder bcry = new BCryptPasswordEncoder();
 		String passwordnew =  bcry.encode(userEntity.getPassword());
+		userEntity.setStatus(true);
 		userEntity.setPassword(passwordnew);
 		return entityRepository.save(userEntity);
 	}
 	@Override
 	public List<UserEntity> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return entityRepository.findAll();
 	}
 	@Override
 	public List<UserEntity> findById(Long id) {

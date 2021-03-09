@@ -1,8 +1,6 @@
 package com.springboot.apiwebsite.entity;
 
-import java.awt.Color;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,10 +27,8 @@ public class ProductEntity extends UrlEntitySuper{
 	private String introduce;
 	@OneToMany(targetEntity = ColorEntity.class,mappedBy  = "product",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ColorEntity> color;
-	@ManyToMany
-	@JoinTable(name="catergory_product",joinColumns = @JoinColumn(name="catergory_id"),
-	inverseJoinColumns = @JoinColumn (name="product_id"))
-	private List<CatergoryEntity> catergory;
+	@ManyToMany(mappedBy = "product")
+	private List<CategoryEntity> category;
 	@OneToMany(mappedBy = "product")
 	private List<InvoiceDetailsEntity> invoiceDetails;
 	public List<InvoiceDetailsEntity> getInvoiceDetails() {
@@ -54,11 +50,11 @@ public class ProductEntity extends UrlEntitySuper{
 	public List<ColorEntity> getColor() {
 		return color;
 	}
-	public List<CatergoryEntity> getCatergory() {
-		return catergory;
+	public List<CategoryEntity> getCatergory() {
+		return category;
 	}
-	public void setCatergory(List<CatergoryEntity> catergory) {
-		this.catergory = catergory;
+	public void setCatergory(List<CategoryEntity> catergory) {
+		this.category = catergory;
 	}
 
 
