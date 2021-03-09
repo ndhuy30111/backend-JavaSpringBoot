@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 53203080d34f920105ee83891c3e5f135acfd6fd
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
@@ -31,6 +34,13 @@ public class UserEntity extends BasicEntitySuper{
 	@OneToMany(mappedBy = "user")
 	private List<InvoiceEntity> invoice;
 
+
+	public List<InvoiceEntity> getInvoice() {
+		return invoice;
+	}
+	public void setInvoice(List<InvoiceEntity> invoice) {
+		this.invoice = invoice;
+	}
 	public String getUserName() {
 		return userName;
 	}

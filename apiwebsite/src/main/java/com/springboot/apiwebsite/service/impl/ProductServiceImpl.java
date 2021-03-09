@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.springboot.apiwebsite.entity.ProductEntity;
 
-public interface ProductServiceImpl extends GeneralService<ProductEntity>{
+public interface ProductServiceImpl extends GeneralServiceImpl<ProductEntity>{
 	public List<ProductEntity> findPage(int page,int size);
 	public ProductEntity findUrl(String url);
 
