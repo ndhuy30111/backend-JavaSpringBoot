@@ -14,6 +14,7 @@ import com.springboot.apiwebsite.service.impl.UserServiceImpl;
 public class UserService implements UserServiceImpl{
 	@Autowired
 	EntityRepository entityRepository;
+	
 	@Override
 	public UserEntity getFindUserName(String userName) {
 		if(userName != null) {
@@ -36,7 +37,7 @@ public class UserService implements UserServiceImpl{
 	@Override
 	public List<UserEntity> findById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return entityRepository.findAll();
 	}
 	@Override
 	public void remove(Long id) {
@@ -48,5 +49,8 @@ public class UserService implements UserServiceImpl{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+		
+	
 
 }

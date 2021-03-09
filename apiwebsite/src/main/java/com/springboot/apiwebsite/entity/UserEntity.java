@@ -7,30 +7,30 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "user")
 public class UserEntity extends BasicEntitySuper{
 	
-	@Column(name = "username",length = 50)
+	@Column(name = "username",length = 50,unique = true)
 	@NotNull(message = "Bạn không được để null Username")
 	private String userName;
-	@Column(name="password")
 	@JsonBackReference
+	@Column(name="password")
 	private String password;
 	@Column(name="email")
 	private String email;
-	@OneToMany(mappedBy = "user")
-	private List<InvoiceEntity> invoice;
-
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	@OneToMany(mappedBy = "user")
+	private List<InvoiceEntity> invoice;
+
+
 	public List<InvoiceEntity> getInvoice() {
 		return invoice;
 	}
