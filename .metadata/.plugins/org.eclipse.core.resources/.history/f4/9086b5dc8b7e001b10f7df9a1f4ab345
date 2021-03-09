@@ -1,5 +1,0 @@
-package com.springboot.apiwebsite.repository;
-
-public class ColorRepository {
-
-}

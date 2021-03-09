@@ -1,8 +1,0 @@
-package com.springboot.apiwebsite.model;
-
-import com.springboot.apiwebsite.entity.UserEntity;
-
-public class UserMapper {
-	public static UserDTO toUserDTO (UserEntity userEntity)
-
-}
