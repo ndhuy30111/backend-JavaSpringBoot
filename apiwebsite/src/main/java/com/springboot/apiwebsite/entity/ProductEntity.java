@@ -1,10 +1,7 @@
 package com.springboot.apiwebsite.entity;
-
-<<<<<<< HEAD
 import java.awt.Color;
 import java.util.ArrayList;
-=======
->>>>>>> 53203080d34f920105ee83891c3e5f135acfd6fd
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -32,15 +29,11 @@ public class ProductEntity extends UrlEntitySuper{
 	private String introduce;
 	@OneToMany(targetEntity = ColorEntity.class,mappedBy  = "product",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ColorEntity> color;
-<<<<<<< HEAD
-	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	@JoinTable(name="catergory_product",joinColumns = @JoinColumn(name="product_id"),
-	inverseJoinColumns = @JoinColumn (name="catergory_id"))
-	private List<CatergoryEntity> catergory = new ArrayList<>();
-=======
+
+
 	@ManyToMany(mappedBy = "product")
 	private List<CategoryEntity> category;
->>>>>>> 53203080d34f920105ee83891c3e5f135acfd6fd
+
 	@OneToMany(mappedBy = "product")
 	private List<InvoiceDetailsEntity> invoiceDetails;
 	public List<InvoiceDetailsEntity> getInvoiceDetails() {

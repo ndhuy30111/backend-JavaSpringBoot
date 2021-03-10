@@ -58,11 +58,9 @@ public class ProductService implements ProductServiceImpl{
 
 	@Override
 	public ProductEntity findByIdOne(Long id) {
-<<<<<<< HEAD
+
 		// TODO Auto-generated method stub
-=======
-		
->>>>>>> 53203080d34f920105ee83891c3e5f135acfd6fd
+
 		return productRepository.findById(id).get();
 	}
 

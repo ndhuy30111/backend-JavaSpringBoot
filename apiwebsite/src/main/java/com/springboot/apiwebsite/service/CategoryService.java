@@ -13,12 +13,14 @@ import com.springboot.apiwebsite.repository.CategoryRepository;
 import com.springboot.apiwebsite.repository.ProductRepository;
 import com.springboot.apiwebsite.service.impl.CategoryServiceImpl;
 import com.springboot.apiwebsite.util.SlugUtil;
+
 @Service
-public class CategoryService implements CategoryServiceImpl{
+public class CategoryService implements CategoryServiceImpl {
 	@Autowired
 	CategoryRepository categoryRepository;
 	@Autowired
 	ProductRepository productRepository;
+
 	@Override
 	public List<CategoryEntity> findAll() {
 		// TODO Auto-generated method stub
@@ -47,27 +49,28 @@ public class CategoryService implements CategoryServiceImpl{
 	@Override
 	public void remove(Long id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	@Transactional
 	public CategoryEntity category_prodcut(CategoryEntity t) {
 		CategoryEntity categoryFind = categoryRepository.findById(t.getId()).get();
-		if(categoryFind!=null) {
-			for(ProductEntity productItem:t.getProduct()) {
+		if (categoryFind != null) {
+			for (ProductEntity productItem : t.getProduct()) {
 				ProductEntity productFind = productRepository.findById(productItem.getId()).get();
-				if(productFind!=null) {
-				if(categoryFind.getProduct().indexOf(productItem)==-1) {
-					
-					categoryFind.getProduct().add(productItem);
-				
-				}}
+				if (productFind != null) {
+					if (categoryFind.getProduct().indexOf(productItem) == -1) {
+
+						categoryFind.getProduct().add(productItem);
+
+					}
+				}
 			}
 			return categoryRepository.saveAndFlush(categoryFind);
-			
+
 		}
-		
+
 		return null;
 	}
 
