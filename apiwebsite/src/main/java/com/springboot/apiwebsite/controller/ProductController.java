@@ -23,10 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springboot.apiwebsite.entity.CategoryEntity;
 import com.springboot.apiwebsite.entity.ColorEntity;
 import com.springboot.apiwebsite.entity.ProductEntity;
 import com.springboot.apiwebsite.entity.SizeEntity;
 import com.springboot.apiwebsite.repository.ProductRepository;
+import com.springboot.apiwebsite.service.CategoryService;
 import com.springboot.apiwebsite.service.ColorService;
 import com.springboot.apiwebsite.service.ProductService;
 import com.springboot.apiwebsite.service.SizeService;
@@ -43,6 +45,8 @@ public class ProductController {
 	private ColorService colorService;
 	@Autowired
 	private SizeService sizeService;
+	@Autowired
+	private CategoryService categoryService;
 	@GetMapping
 	public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "5") int size) {
@@ -65,8 +69,15 @@ public class ProductController {
 					itemSize.setColor(colorNew);
 					sizeService.save(itemSize);
 				}
-			}	
-			return new ResponseEntity<>(productEntity,HttpStatus.CREATED);
+			}
+			for(CategoryEntity categoryItem: productEntity.getCategory()) {
+				CategoryEntity categoryFind= categoryService.findByIdOne(categoryItem.getId());
+				if(categoryFind!=null) {
+					categoryFind.getProduct().add(productnew);
+				}
+				categoryService.save(categoryFind);
+			}
+			return new ResponseEntity<>(productnew,HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 

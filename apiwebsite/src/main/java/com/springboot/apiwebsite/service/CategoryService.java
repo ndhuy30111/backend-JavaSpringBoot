@@ -59,9 +59,7 @@ public class CategoryService implements CategoryServiceImpl{
 				ProductEntity productFind = productRepository.findById(productItem.getId()).get();
 				if(productFind!=null) {
 				if(categoryFind.getProduct().indexOf(productItem)==-1) {
-					
 					categoryFind.getProduct().add(productItem);
-				
 				}}
 			}
 			return categoryRepository.saveAndFlush(categoryFind);

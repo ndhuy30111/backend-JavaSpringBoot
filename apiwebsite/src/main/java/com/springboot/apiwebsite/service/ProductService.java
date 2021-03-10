@@ -30,7 +30,7 @@ public class ProductService implements ProductServiceImpl{
 	@Transactional
 	public ProductEntity save(@Valid ProductEntity productEntity) {
 		productEntity.setUrl(SlugUtil.makeSlug(productEntity.getName()));
-
+		productEntity.setStatus(true);
 		return productRepository.save(productEntity);
 	}
 
