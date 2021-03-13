@@ -1,11 +1,14 @@
 package com.springboot.apiwebsite.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,16 +22,18 @@ public class ColorEntity extends UrlEntitySuper{
 	@JoinColumn(columnDefinition = "product_id")
 	@JsonBackReference
 	private ProductEntity product;
-	
-	
-	
 	@OneToMany(targetEntity = SizeEntity.class,mappedBy = "color",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<SizeEntity> size;
-	@OneToMany(mappedBy = "color")
-	private List<UploadFileEntity> image;
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name="color_image",joinColumns = @JoinColumn(name="color_id"),
+	inverseJoinColumns = @JoinColumn (name="image_id"))
+	private List<UploadFileEntity>image = new ArrayList<>();
+	
 	public ProductEntity getProduct() {
 		return product;
 	}
+	
 	public void setProduct(ProductEntity product) {
 		this.product = product;
 	}

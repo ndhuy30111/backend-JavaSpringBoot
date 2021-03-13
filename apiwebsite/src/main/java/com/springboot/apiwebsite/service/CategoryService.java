@@ -42,7 +42,7 @@ public class CategoryService implements CategoryServiceImpl {
 	@Override
 	public CategoryEntity save(CategoryEntity t) {
 		t.setStatus(true);
-		t.setUrl(SlugUtil.makeSlug(t.getName()));
+		t.setUrl(SlugUtil.makeSlug(t.getName().trim()));
 		return categoryRepository.save(t);
 	}
 
@@ -59,7 +59,7 @@ public class CategoryService implements CategoryServiceImpl {
 		if (categoryFind != null) {
 			for (ProductEntity productItem : t.getProduct()) {
 				ProductEntity productFind = productRepository.findById(productItem.getId()).get();
-<<<<<<< HEAD
+
 				if (productFind != null) {
 					if (categoryFind.getProduct().indexOf(productItem) == -1) {
 
@@ -67,12 +67,12 @@ public class CategoryService implements CategoryServiceImpl {
 
 					}
 				}
-=======
+
 				if(productFind!=null) {
 				if(categoryFind.getProduct().indexOf(productItem)==-1) {
 					categoryFind.getProduct().add(productItem);
 				}}
->>>>>>> d4bd41485ca2b3cf0c1342b99729858b03092478
+
 			}
 			return categoryRepository.saveAndFlush(categoryFind);
 

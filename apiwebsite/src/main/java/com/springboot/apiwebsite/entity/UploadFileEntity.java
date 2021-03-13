@@ -1,43 +1,69 @@
 package com.springboot.apiwebsite.entity;
 
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="uploadFile")
+@Table(name="uploadfile")
 public class UploadFileEntity {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	@Column(name="filename")
     private String fileName;
+	@Column(name = "filedowndloaduri")
     private String fileDownloadUri;
+	@Column(name="filetype")
     private String fileType;
+	@Column(name="size")
     private long size;
-	@ManyToOne
-	@JoinColumn(name="color_id")
-	private ColorEntity color;
+    @ManyToMany(mappedBy = "image" )
+	private List<ColorEntity> color;
 	
-	public UploadFileEntity(String fileName, String fileDownloadUri, String fileType, long size, ColorEntity color) {
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public UploadFileEntity(String fileName, String fileDownloadUri, String fileType, long size) {
 		super();
 		this.fileName = fileName;
 		this.fileDownloadUri = fileDownloadUri;
 		this.fileType = fileType;
 		this.size = size;
-		this.color = color;
 	}
 
-	public ColorEntity getColor() {
-		return color;
-	}
-
-	public void setColor(ColorEntity color) {
-		this.color = color;
-	}
 
 	public String getFileName() {
 		return fileName;
 	}
+
+	public UploadFileEntity() {
+		super();
+	}
+
+
+	public List<ColorEntity> getColor() {
+		return color;
+	}
+	public void setColor(List<ColorEntity> color) {
+		this.color = color;
+	}
+
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;

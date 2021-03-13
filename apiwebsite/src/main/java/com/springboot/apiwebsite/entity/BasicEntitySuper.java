@@ -73,9 +73,9 @@ public class BasicEntitySuper {
 		return id;
 	}
 	public String getName() {
-		return name;
+		return name.trim();
 	}
 	public void setName(String name) {
-		this.name = name;
+		this.name = name.trim();
 	}
 }

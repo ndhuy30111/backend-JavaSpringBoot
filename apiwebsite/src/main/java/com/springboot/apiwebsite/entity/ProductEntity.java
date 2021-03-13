@@ -31,16 +31,10 @@ public class ProductEntity extends UrlEntitySuper{
 	private String introduce;
 	@OneToMany(targetEntity = ColorEntity.class,mappedBy  = "product",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ColorEntity> color;
-<<<<<<< HEAD
-
-
-	@ManyToMany(mappedBy = "product")
-	private List<CategoryEntity> category;
-
-=======
 	@JsonBackReference
 	@ManyToMany(mappedBy = "product")
 	private List<CategoryEntity> category;
+
 	
 	public List<CategoryEntity> getCategory() {
 		return category;
@@ -48,7 +42,9 @@ public class ProductEntity extends UrlEntitySuper{
 	public void setCategory(List<CategoryEntity> category) {
 		this.category = category;
 	}
->>>>>>> d4bd41485ca2b3cf0c1342b99729858b03092478
+
+	
+
 	@OneToMany(mappedBy = "product")
 	private List<InvoiceDetailsEntity> invoiceDetails;
 	public List<InvoiceDetailsEntity> getInvoiceDetails() {

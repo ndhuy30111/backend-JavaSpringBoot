@@ -51,17 +51,18 @@ public class ImageUploadController {
 	                .path(fileName)
 	                .toUriString();
 	        return new UploadFileEntity(fileName, fileDownloadUri,
-	                file.getContentType(), file.getSize(),colorNew);
+	                file.getContentType(), file.getSize());
 	    
 	    }
 
 	    @PostMapping("/uploadMultipleFiles")
 	    public List<UploadFileEntity> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files,@RequestParam("Color") String color) {
+	    	
 	    	return Arrays.asList(files)
 	                .stream()
 	                .map(file -> {
 						try {
-							return uploadFile(file,color);
+							return uploadFile(file,color);						
 						} catch (JsonMappingException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

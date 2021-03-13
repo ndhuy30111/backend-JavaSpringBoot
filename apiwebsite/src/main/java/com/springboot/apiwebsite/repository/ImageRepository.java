@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.springboot.apiwebsite.entity.UploadFileEntity;
 
-public interface ImageRepository extends JpaRepository<UploadFileEntity, String>{
-
+public interface ImageRepository extends JpaRepository<UploadFileEntity, Long>{
+	UploadFileEntity findByFileName(String name);
 }
