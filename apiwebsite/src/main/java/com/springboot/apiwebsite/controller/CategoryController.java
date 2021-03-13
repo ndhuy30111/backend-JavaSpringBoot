@@ -33,7 +33,7 @@ public class CategoryController {
 	@PostMapping("/product")
 	public ResponseEntity<?> category_product(@RequestBody CategoryEntity categoryEntity){
 		try {
-			 CategoryEntity category	=  categoryService.category_prodcut(categoryEntity);
+			 CategoryEntity category = categoryService.category_prodcut(categoryEntity);
 			 return new ResponseEntity<>(category,HttpStatus.OK);
 			}catch(Exception ex) {
 				return new ResponseEntity<>(ex.getMessage(),HttpStatus.BAD_REQUEST);

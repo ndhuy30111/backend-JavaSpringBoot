@@ -8,11 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.apiwebsite.entity.UserEntity;
@@ -46,6 +49,18 @@ public class AuthenticationController {
 		final String jwt = jwtTokenUtil.generateToken(userDetails);
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
+	@PostMapping("/api/profile")
+	public ResponseEntity<?>profileUser(@RequestParam(value = "jwt") String jwt){
+	 try {
+		 String userName = jwtTokenUtil.extractUsername(jwt);
+		 UserEntity userEntity = userService.getFindUserName(userName);
+		 return new ResponseEntity<>(userEntity,HttpStatus.OK);	
+	 }catch(Exception ex) {
+		 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	 }	
+		
+		
+	}
 	@PostMapping("/api/dangky")
 	public ResponseEntity<?>createUser(@Valid @RequestBody UserEntity user) throws Exception{
 		try {
@@ -55,6 +70,7 @@ public class AuthenticationController {
 			throw new Exception("Lỗi sai mật khẩu");
 		}
 	}
+	
 	@GetMapping("/api/account")
 	public ResponseEntity<?>getUser(){
 		return new ResponseEntity<>(userService.findAll(),HttpStatus.OK);
