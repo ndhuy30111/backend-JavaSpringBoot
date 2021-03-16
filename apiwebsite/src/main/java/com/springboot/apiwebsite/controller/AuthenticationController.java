@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.apiwebsite.entity.UserEntity;
+import com.springboot.apiwebsite.exception.AccountEx;
 import com.springboot.apiwebsite.model.AuthenticationRequest;
 import com.springboot.apiwebsite.model.AuthenticationResponse;
 import com.springboot.apiwebsite.service.MyUserDetailsService;
@@ -43,32 +44,29 @@ public class AuthenticationController {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(), authenticationRequest.getPassword()));
 		}
 		catch(BadCredentialsException e){
-			throw new Exception("Tài khoản mật khẩu có thể sai");
+			throw new AccountEx("Sai tài khoản hoặc mật khẩu");
 		}
 		final UserDetails userDetails = myUserDetailsService.loadUserByUsername(authenticationRequest.getUserName());
 		final String jwt = jwtTokenUtil.generateToken(userDetails);
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
 	@PostMapping("/api/profile")
-	public ResponseEntity<?>profileUser(@RequestParam(value = "jwt") String jwt){
+	public ResponseEntity<?>profileUser(@Valid @RequestParam(value = "jwt") String jwt){
 	 try {
 		 String userName = jwtTokenUtil.extractUsername(jwt);
 		 UserEntity userEntity = userService.getFindUserName(userName);
 		 return new ResponseEntity<>(userEntity,HttpStatus.OK);	
 	 }catch(Exception ex) {
-		 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		 throw new AccountEx("Không tìm thấy tài khoản");
 	 }	
 		
 		
 	}
 	@PostMapping("/api/dangky")
-	public ResponseEntity<?>createUser(@Valid @RequestBody UserEntity user) throws Exception{
-		try {
+	public ResponseEntity<?>createUser( @RequestBody UserEntity user) throws Exception{
 			UserEntity userEntityNew = userService.save(user);
 			return new ResponseEntity<>(userEntityNew,HttpStatus.CREATED);	
-		}catch(Exception e) {
-			throw new Exception("Trung ten");
-		}
+	
 	}
 	
 	@GetMapping("/api/account")

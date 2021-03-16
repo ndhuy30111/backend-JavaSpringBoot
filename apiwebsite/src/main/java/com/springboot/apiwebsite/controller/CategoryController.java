@@ -1,5 +1,7 @@
 package com.springboot.apiwebsite.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,7 @@ public class CategoryController {
 		return new ResponseEntity<>(categoryService.findAll(),HttpStatus.OK);
 	}
 	@PostMapping
-	public ResponseEntity<?> save(@RequestBody CategoryEntity categoryEntity){
+	public ResponseEntity<?> save(@Valid @RequestBody CategoryEntity categoryEntity){
 		try {
 		 CategoryEntity category	=  categoryService.save(categoryEntity);
 		 return new ResponseEntity<>(category,HttpStatus.OK);
@@ -31,7 +33,7 @@ public class CategoryController {
 		}
 	}
 	@PostMapping("/product")
-	public ResponseEntity<?> category_product(@RequestBody CategoryEntity categoryEntity){
+	public ResponseEntity<?> category_product(@Valid @RequestBody CategoryEntity categoryEntity){
 		try {
 			 CategoryEntity category = categoryService.category_prodcut(categoryEntity);
 			 return new ResponseEntity<>(category,HttpStatus.OK);

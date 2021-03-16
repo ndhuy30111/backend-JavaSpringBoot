@@ -31,8 +31,8 @@ public class ProductEntity extends UrlEntitySuper{
 	private String introduce;
 	@OneToMany(targetEntity = ColorEntity.class,mappedBy  = "product",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ColorEntity> color;
-	@JsonBackReference
 	@ManyToMany(mappedBy = "product")
+	@JsonBackReference
 	private List<CategoryEntity> category;
 
 	

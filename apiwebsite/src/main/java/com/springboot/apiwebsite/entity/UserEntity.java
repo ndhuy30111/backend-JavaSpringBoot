@@ -6,10 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-
-
+import org.hibernate.validator.constraints.UniqueElements;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -23,7 +25,7 @@ public class UserEntity extends BasicEntitySuper{
 	@JsonBackReference
 	@Column(name="password")
 	private String password;
-	@Column(name="email")
+	@Column(name="email",unique = true)
 	private String email;
 	public String getEmail() {
 		return email;

@@ -58,7 +58,7 @@ public class ProductController {
 	private ImageUploadController imgController;
 	
 	@GetMapping
-	public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0") int page,
+	public ResponseEntity<?> getAll(@Valid @RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "5") int size) {
 		return new ResponseEntity<>(productService.findPage(page, size), HttpStatus.OK);
 	}

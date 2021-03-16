@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +43,7 @@ public class ImageUploadController {
 	    private FileStorageService fileStorageService;
 	    
 	    @PostMapping("/uploadFile")
-	    public UploadFileEntity uploadFile(@RequestParam("file") MultipartFile file,@RequestParam("color") String color) throws JsonMappingException, JsonProcessingException {
+	    public UploadFileEntity uploadFile(@Valid @RequestParam("file") MultipartFile file,@RequestParam("color") String color) throws JsonMappingException, JsonProcessingException {
 	        String fileName = fileStorageService.storeFile(file);
 	        ColorEntity colorNew;
 			colorNew = new ObjectMapper().readValue(color,ColorEntity.class);
@@ -56,7 +57,7 @@ public class ImageUploadController {
 	    }
 
 	    @PostMapping("/uploadMultipleFiles")
-	    public List<UploadFileEntity> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files,@RequestParam("Color") String color) {
+	    public List<UploadFileEntity> uploadMultipleFiles(@Valid @RequestParam("files") MultipartFile[] files,@RequestParam("Color") String color) {
 	    	
 	    	return Arrays.asList(files)
 	                .stream()
