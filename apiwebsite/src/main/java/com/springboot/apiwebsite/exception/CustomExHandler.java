@@ -13,4 +13,5 @@ public class CustomExHandler {
   public ResponseError handlerEx(AccountEx ex ,WebRequest req) {
 	  return new ResponseError(HttpStatus.BAD_REQUEST, ex.getMessage());
   }
+ 
 }

@@ -8,6 +8,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "invoice")
 public class InvoiceEntity extends BasicEntitySuper{
@@ -16,12 +18,21 @@ public class InvoiceEntity extends BasicEntitySuper{
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private UserEntity user;
+	@JsonBackReference
 	public List<InvoiceDetailsEntity> getInvoiceDetails() {
 		return invoiceDetails;
 	}
 
 	public void setInvoiceDetails(List<InvoiceDetailsEntity> invoiceDetails) {
 		this.invoiceDetails = invoiceDetails;
+	}
+
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
 	}
 	
 }

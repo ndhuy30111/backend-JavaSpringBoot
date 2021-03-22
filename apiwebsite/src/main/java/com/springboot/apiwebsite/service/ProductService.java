@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import com.springboot.apiwebsite.entity.ColorEntity;
 import com.springboot.apiwebsite.entity.ProductEntity;
+import com.springboot.apiwebsite.exception.AccountEx;
+import com.springboot.apiwebsite.exception.ProductEx;
 import com.springboot.apiwebsite.repository.ProductRepository;
 import com.springboot.apiwebsite.service.impl.ProductServiceImpl;
 import com.springboot.apiwebsite.util.SlugUtil;
@@ -32,6 +34,8 @@ public class ProductService implements ProductServiceImpl{
 	public ProductEntity save(@Valid ProductEntity productEntity) {
 		productEntity.setUrl(SlugUtil.makeSlug(productEntity.getName()));
 		productEntity.setStatus(true);
+		
+	
 		return productRepository.save(productEntity);
 	}
 
@@ -51,9 +55,9 @@ public class ProductService implements ProductServiceImpl{
 	}
 
 	@Override
-	public ProductEntity findUrl(String url) {
-		// TODO Auto-generated method stub
-		return null;
+	public ProductEntity findtByUrlOne(String url) {
+		
+		return productRepository.findOneByUrl(url);
 	}
 
 	@Override
@@ -63,6 +67,7 @@ public class ProductService implements ProductServiceImpl{
 
 		return productRepository.findById(id).get();
 	}
+
 
 	
 

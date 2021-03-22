@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="uploadfile")
 public class UploadFileEntity {
@@ -27,6 +29,7 @@ public class UploadFileEntity {
 	@Column(name="size")
     private long size;
     @ManyToMany(mappedBy = "image" )
+    @JsonBackReference
 	private List<ColorEntity> color;
 	
 	public Long getId() {

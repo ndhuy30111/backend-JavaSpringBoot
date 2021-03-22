@@ -77,7 +77,7 @@ public class UserService implements UserServiceImpl{
 		// TODO Auto-generated method stub
 		return entityRepository.findOneByEmail(email);
 	}
-
+	
 	
 	
 

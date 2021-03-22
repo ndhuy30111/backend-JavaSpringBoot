@@ -7,4 +7,5 @@ public interface UserServiceImpl extends GeneralServiceImpl<UserEntity>{
 	UserEntity getFindUserByEmail(String email);
 	UserEntity save(UserEntity userEntity);
 	
+	
 }

@@ -35,22 +35,17 @@ public class ProductEntity extends UrlEntitySuper{
 	@JsonBackReference
 	private List<CategoryEntity> category;
 
-	
 	public List<CategoryEntity> getCategory() {
 		return category;
 	}
 	public void setCategory(List<CategoryEntity> category) {
 		this.category = category;
 	}
-
-	
-
 	@OneToMany(mappedBy = "product")
 	private List<InvoiceDetailsEntity> invoiceDetails;
 	public List<InvoiceDetailsEntity> getInvoiceDetails() {
 		return invoiceDetails;
 	}
-	
 	public void setInvoiceDetails(List<InvoiceDetailsEntity> invoiceDetails) {
 		this.invoiceDetails = invoiceDetails;
 	}
@@ -67,9 +62,6 @@ public class ProductEntity extends UrlEntitySuper{
 	public List<ColorEntity> getColor() {
 		return color;
 	}
-
-
-
 	public Long getPrice() {
 		return price;
 	}
@@ -81,12 +73,6 @@ public class ProductEntity extends UrlEntitySuper{
 	}
 	public void setDiscount(Long discount) {
 		this.discount = discount;
-	}
-	public String getShortintroduction() {
-		return shortIntroduction;
-	}
-	public void setShortintroduction(String shortintroduction) {
-		this.shortIntroduction = shortintroduction;
 	}
 	public String getIntroduce() {
 		return introduce;

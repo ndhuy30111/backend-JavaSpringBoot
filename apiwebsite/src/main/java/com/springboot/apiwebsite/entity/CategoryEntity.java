@@ -19,7 +19,7 @@ public class CategoryEntity extends UrlEntitySuper{
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name="category_product",joinColumns = @JoinColumn(name="category_id"),
 	inverseJoinColumns = @JoinColumn (name="product_id"))
-	@JsonBackReference
+	
 	private List<ProductEntity> product;
 
 	

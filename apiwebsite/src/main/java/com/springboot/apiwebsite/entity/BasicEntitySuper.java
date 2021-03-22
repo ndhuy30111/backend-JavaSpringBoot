@@ -22,7 +22,7 @@ public class BasicEntitySuper {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(name = "name",length = 100,nullable = false)
+	@Column(name = "name",length = 100,nullable = false,unique=true)
 	@NotNull(message = "Bạn không được để null name")
 	private String name;
 	@Column
@@ -73,9 +73,9 @@ public class BasicEntitySuper {
 		return id;
 	}
 	public String getName() {
-		return name.trim();
+		return name.trim().replaceAll("( )+", " ");
 	}
 	public void setName(String name) {
-		this.name = name.trim();
+		this.name = name.trim().replaceAll("( )+", " ");
 	}
 }
