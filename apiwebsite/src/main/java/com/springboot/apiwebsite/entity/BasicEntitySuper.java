@@ -22,7 +22,7 @@ public class BasicEntitySuper {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(name = "name",length = 100,nullable = false,unique=true)
+	@Column(name = "name",length = 100,nullable = false)
 	@NotNull(message = "Bạn không được để null name")
 	private String name;
 	@Column
