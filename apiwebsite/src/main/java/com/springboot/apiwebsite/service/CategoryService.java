@@ -81,4 +81,10 @@ public class CategoryService implements CategoryServiceImpl {
 		return null;
 	}
 
+	@Override
+	public CategoryEntity findByUrlOne(String url) {
+		
+		return categoryRepository.findOneByUrl(url);
+	}
+
 }

@@ -67,7 +67,10 @@ public class ProductService implements ProductServiceImpl{
 
 		return productRepository.findById(id).get();
 	}
-
+	public List<ProductEntity> getProduct(String name)
+	{
+		return productRepository.findByNameLike(name);
+	}
 
 	
 

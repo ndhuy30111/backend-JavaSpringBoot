@@ -1,16 +1,9 @@
 package com.springboot.apiwebsite.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
-
 import javax.validation.Valid;
 import javax.validation.ValidationException;
-import javax.validation.valueextraction.ValueExtractorDeclarationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,16 +25,12 @@ import com.springboot.apiwebsite.entity.ColorEntity;
 import com.springboot.apiwebsite.entity.ProductEntity;
 import com.springboot.apiwebsite.entity.SizeEntity;
 import com.springboot.apiwebsite.entity.UploadFileEntity;
-import com.springboot.apiwebsite.exception.AccountEx;
 import com.springboot.apiwebsite.exception.ProductEx;
-import com.springboot.apiwebsite.repository.ImageRepository;
-import com.springboot.apiwebsite.repository.ProductRepository;
 import com.springboot.apiwebsite.service.CategoryService;
 import com.springboot.apiwebsite.service.ColorService;
 import com.springboot.apiwebsite.service.FileStorageService;
 import com.springboot.apiwebsite.service.ProductService;
 import com.springboot.apiwebsite.service.SizeService;
-import com.springboot.apiwebsite.service.impl.ColorServiceImpl;
 
 
 @RestController
