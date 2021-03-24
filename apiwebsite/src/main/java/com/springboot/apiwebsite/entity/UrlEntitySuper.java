@@ -12,7 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class UrlEntitySuper extends BasicEntitySuper{
-	@Column(name="url",columnDefinition = "text",unique = true)
+	@Column(name="url",columnDefinition = "text")
 	private String url;
 	public String getUrl() {
 		return url;

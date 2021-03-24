@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -33,12 +34,21 @@ public class UserEntity extends BasicEntitySuper{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	@ManyToMany(mappedBy = "user",targetEntity = RoleEntity.class)
+	private List<RoleEntity> role;
 	@OneToMany(mappedBy = "user")
 	private List<InvoiceEntity> invoice;
 
 
 	public List<InvoiceEntity> getInvoice() {
 		return invoice;
+	}
+	public List<RoleEntity> getRoles() {
+		return role;
+	}
+	public void setRoles(List<RoleEntity> role) {
+		this.role = role;
 	}
 	public void setInvoice(List<InvoiceEntity> invoice) {
 		this.invoice = invoice;
