@@ -1,4 +1,5 @@
 package com.springboot.apiwebsite.entity;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,6 +25,8 @@ public class ProductEntity extends UrlEntitySuper{
 	private String shortIntroduction;
 	@Column(name="Introduce")
 	private String introduce;
+	@OneToMany(mappedBy = "product")
+	private List<InvoiceDetailsEntity> invoiceDetails;
 	@OneToMany(targetEntity = ColorEntity.class,mappedBy  = "product",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ColorEntity> color;
 	@ManyToMany(mappedBy = "product")
@@ -36,8 +39,6 @@ public class ProductEntity extends UrlEntitySuper{
 	public void setCategory(List<CategoryEntity> category) {
 		this.category = category;
 	}
-	@OneToMany(mappedBy = "product")
-	private List<InvoiceDetailsEntity> invoiceDetails;
 	public List<InvoiceDetailsEntity> getInvoiceDetails() {
 		return invoiceDetails;
 	}
