@@ -1,11 +1,16 @@
 package com.springboot.apiwebsite.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.springboot.apiwebsite.entity.RoleEntity;
 import com.springboot.apiwebsite.entity.UserEntity;
 
 
@@ -23,7 +28,14 @@ public class MyUserDetails implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return null;
+		List<RoleEntity> roles = user.getRole();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+         
+        for (RoleEntity role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+         
+        return authorities;
 	}
 
 	@Override

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -14,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
@@ -33,6 +36,16 @@ public class UserEntity extends BasicEntitySuper{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public List<RoleEntity> getRole() {
+		return role;
+	}
+	public void setRole(List<RoleEntity> role) {
+		this.role = role;
+	}
+	
+	@ManyToMany(mappedBy = "user",fetch = FetchType.EAGER)
+	private List<RoleEntity> role;
 	@OneToMany(mappedBy = "user")
 	private List<InvoiceEntity> invoice;
 
@@ -40,6 +53,7 @@ public class UserEntity extends BasicEntitySuper{
 	public List<InvoiceEntity> getInvoice() {
 		return invoice;
 	}
+
 	public void setInvoice(List<InvoiceEntity> invoice) {
 		this.invoice = invoice;
 	}

@@ -2,6 +2,7 @@ package com.springboot.apiwebsite.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,7 +12,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
 import com.springboot.apiwebsite.filter.JwtRequestFilter;
 import com.springboot.apiwebsite.service.MyUserDetailsService;
@@ -32,7 +32,14 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
-		.authorizeRequests().antMatchers("api/Authentication").permitAll()
+		.authorizeRequests()
+		.antMatchers(HttpMethod.POST,"/api/dangky").permitAll()
+		.antMatchers(HttpMethod.POST,"/api/Authentication").permitAll()
+		.antMatchers(HttpMethod.DELETE).authenticated()
+		.antMatchers(HttpMethod.POST).authenticated()
+		.antMatchers(HttpMethod.PATCH).authenticated()
+		.antMatchers(HttpMethod.PUT).authenticated()
+		
 		.and().sessionManagement()
 		.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().cors().disable();
 		http.addFilterBefore(jwtRequestFilter,UsernamePasswordAuthenticationFilter.class);
@@ -45,5 +52,6 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
 
 }
