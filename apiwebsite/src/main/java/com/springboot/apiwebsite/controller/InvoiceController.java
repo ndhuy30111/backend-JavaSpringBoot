@@ -1,5 +1,7 @@
 package com.springboot.apiwebsite.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,14 +28,15 @@ public class InvoiceController {
 	InvoiceDetailsService invoiceDetailsService;
 	@PostMapping("/invoice")
 	@ResponseBody
-	public ResponseEntity<?> save(@RequestBody InvoiceEntity invoiceEntity) 
+	public ResponseEntity<?> save(@RequestBody List<InvoiceDetailsEntity> listInvoiceDetailsEntities) 
 	{
-		InvoiceEntity InvoiceNew  =  invoiceService.save(invoiceEntity);
-		for (InvoiceDetailsEntity a : InvoiceNew.getInvoiceDetails()) {
-			a.setInvoice(InvoiceNew);
-			InvoiceDetailsEntity invoiceDetailsServiceNew = invoiceDetailsService.save(a);
-			
+		InvoiceEntity invoiceEntityNew = new InvoiceEntity();
+		
+		InvoiceEntity invoiceEntity = invoiceService.save(invoiceEntityNew);
+		for(InvoiceDetailsEntity item : listInvoiceDetailsEntities) {
+			item.setInvoice(invoiceEntity);
+			invoiceDetailsService.save(item);
 		}
-		 return new ResponseEntity<>(InvoiceNew,HttpStatus.OK);
+		 return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

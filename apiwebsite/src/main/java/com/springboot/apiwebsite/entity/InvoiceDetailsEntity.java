@@ -15,8 +15,6 @@ public class InvoiceDetailsEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(name="name")
-	private String name;
 	@ManyToOne
 	@JoinColumn(name="invoice_id")
 	private InvoiceEntity invoice ;
@@ -25,17 +23,12 @@ public class InvoiceDetailsEntity {
 	private ProductEntity product ;
 	@Column(name="amount")
 	private Integer amount;
+	@Column(name="price")
+	private Long price;
 	public void setId(Long id) {
 		this.id = id;
 	}
-	@Column(name="price")
-	private Long price;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+	
 	public InvoiceEntity getInvoice() {
 		return invoice;
 	}

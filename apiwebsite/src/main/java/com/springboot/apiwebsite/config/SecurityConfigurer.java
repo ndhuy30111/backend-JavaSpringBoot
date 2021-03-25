@@ -35,6 +35,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 		.authorizeRequests()
 		.antMatchers(HttpMethod.POST,"/api/dangky").permitAll()
 		.antMatchers(HttpMethod.POST,"/api/Authentication").permitAll()
+		.antMatchers(HttpMethod.GET).permitAll()
 		.antMatchers(HttpMethod.DELETE).authenticated()
 		.antMatchers(HttpMethod.POST).authenticated()
 		.antMatchers(HttpMethod.PATCH).authenticated()
