@@ -22,7 +22,7 @@ import com.springboot.apiwebsite.service.CategoryService;
 public class CategoryController {
 	@Autowired
 	CategoryService categoryService;
-	@GetMapping("category/{url}")
+	@GetMapping("{url}")
 	public ResponseEntity<?> findOneByUrl(@PathVariable String url)
 	{
 		return new ResponseEntity<>(categoryService.findByUrlOne(url),HttpStatus.OK);
