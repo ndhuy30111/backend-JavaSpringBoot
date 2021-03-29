@@ -30,6 +30,15 @@ public class UserEntity extends BasicEntitySuper{
 	private String password;
 	@Column(name="email",unique = true)
 	private String email;
+	@Column(name="isEnabled")
+	@NotNull(message = "Không null")
+	private boolean isEnabled;
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
 	public String getEmail() {
 		return email;
 	}

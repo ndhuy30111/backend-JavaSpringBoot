@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -18,13 +19,21 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "color")
 public class ColorEntity extends UrlEntitySuper{
 
+	@Column(name="tag_NameColor")
+	private String tagNameColor;
+	public String getTagNameColor() {
+		return tagNameColor;
+	}
+
+	public void setTagNameColor(String tagNameColor) {
+		this.tagNameColor = tagNameColor;
+	}
 	@ManyToOne
 	@JoinColumn(columnDefinition = "product_id")
 	@JsonBackReference
 	private ProductEntity product;
 	@OneToMany(targetEntity = SizeEntity.class,mappedBy = "color",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<SizeEntity> size;
-	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name="color_image",joinColumns = @JoinColumn(name="color_id"),
 	inverseJoinColumns = @JoinColumn (name="image_id"))
