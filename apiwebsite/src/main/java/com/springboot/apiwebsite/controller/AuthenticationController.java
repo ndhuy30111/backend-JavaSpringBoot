@@ -1,5 +1,7 @@
 package com.springboot.apiwebsite.controller;
 
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.apiwebsite.entity.UserEntity;
-import com.springboot.apiwebsite.exception.AccountEx;
+import com.springboot.apiwebsite.exception.BadRequestEx;
 import com.springboot.apiwebsite.model.AuthenticationRequest;
 import com.springboot.apiwebsite.model.AuthenticationResponse;
 import com.springboot.apiwebsite.service.MyUserDetailsService;
@@ -39,25 +41,26 @@ public class AuthenticationController {
 	@Autowired
 	private UserService userService;
 	@PostMapping(value = "/api/Authentication")
-	public ResponseEntity<?>createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)throws Exception{
+	public ResponseEntity<?>createAuthenticationToken(@Valid @RequestBody AuthenticationRequest authenticationRequest)throws Exception{
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(), authenticationRequest.getPassword()));
 		}
 		catch(BadCredentialsException e){
-			throw new AccountEx("Sai tài khoản hoặc mật khẩu");
+			throw new BadRequestEx("Sai tài khoản hoặc mật khẩu");
 		}
 		final UserDetails userDetails = myUserDetailsService.loadUserByUsername(authenticationRequest.getUserName());
 		final String jwt = jwtTokenUtil.generateToken(userDetails);
-		return ResponseEntity.ok(new AuthenticationResponse(jwt));
+		Date date = jwtTokenUtil.extractExpiration(jwt);
+		return ResponseEntity.ok(new AuthenticationResponse(jwt,date));
 	}
 	@PostMapping("/api/profile")
-	public ResponseEntity<?>profileUser(@Valid @RequestParam(value = "jwt") String jwt){
+	public ResponseEntity<?>profileUser(@Valid @RequestBody AuthenticationResponse auth){
 	 try {
-		 String userName = jwtTokenUtil.extractUsername(jwt);
+		 String userName = jwtTokenUtil.extractUsername(auth.getJwt());
 		 UserEntity userEntity = userService.getFindUserName(userName);
 		 return new ResponseEntity<>(userEntity,HttpStatus.OK);	
 	 }catch(Exception ex) {
-		 throw new AccountEx("Không tìm thấy tài khoản");
+		 throw new BadRequestEx("Không tìm thấy tài khoản");
 	 }	
 		
 		

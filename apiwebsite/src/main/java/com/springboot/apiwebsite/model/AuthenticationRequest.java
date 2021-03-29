@@ -1,7 +1,12 @@
 package com.springboot.apiwebsite.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class AuthenticationRequest {
+	@NotBlank(message = "Bạn không được bỏ tróng Username")
 	private String userName;
+	@NotBlank(message = "Bạn không được bỏ trống password")
 	private String password;
 	public String getUserName() {
 		return userName;

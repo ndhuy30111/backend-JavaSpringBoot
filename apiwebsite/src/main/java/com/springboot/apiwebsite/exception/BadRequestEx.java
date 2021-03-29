@@ -1,12 +1,12 @@
 package com.springboot.apiwebsite.exception;
 
-public class AccountEx  extends RuntimeException{
+public class BadRequestEx extends RuntimeException{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public AccountEx(String message) {
+	public BadRequestEx(String message) {
 		super(message);
 	}
 
