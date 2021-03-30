@@ -70,9 +70,10 @@ public class ProductController {
 	@PostMapping
 	@Transactional(rollbackFor = BadRequestEx.class)
 	public ResponseEntity<?> save(@RequestParam(value = "product") String product,
-			@RequestParam(name = "file", required = false) MultipartFile[] file)
-			throws Exception, ValidationException, ValidationException {
+			@RequestParam(name = "file", required = true) MultipartFile[] file)
+			throws Exception, ValidationException, ValidationException ,BadRequestEx{
 		try {
+		
 			ProductEntity productEntity = new ObjectMapper().readValue(product, ProductEntity.class);
 			ProductEntity productFind = productService.findOneByName(productEntity.getName());
 			if(productFind==null) {
@@ -129,7 +130,8 @@ public class ProductController {
 		} catch (BadRequestEx e) {
 			return new ResponseEntity<>(new BadRequestEx("Lỗi không thể thêm sản phẩm"), HttpStatus.BAD_REQUEST);
 
-		}return new ResponseEntity<>(new BadRequestEx("Trùng tên sản phẩm"),HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>(new BadRequestEx("Trùng tên sản phẩm"),HttpStatus.BAD_REQUEST);
 	}
 
 }

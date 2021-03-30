@@ -84,7 +84,7 @@ public class BasicEntitySuper {
 		return id;
 	}
 	public String getName() {
-		return name.trim().replaceAll("( )+", " ");
+		return name;
 	}
 	public void setName(String name) {
 		this.name = name.trim().replaceAll("( )+", " ");

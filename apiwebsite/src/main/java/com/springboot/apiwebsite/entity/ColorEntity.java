@@ -13,8 +13,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "color")
 public class ColorEntity extends UrlEntitySuper{
@@ -22,16 +24,11 @@ public class ColorEntity extends UrlEntitySuper{
 
 	@Column(name="code")
 	private String code;
-	public String getCode() {
-		return code;
-		}
+	
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(columnDefinition = "product_id")
-	@JsonBackReference
+	@JsonIgnore
 	private ProductEntity product;
 	@OneToMany(targetEntity = SizeEntity.class,mappedBy = "color",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<SizeEntity> size;
@@ -40,6 +37,16 @@ public class ColorEntity extends UrlEntitySuper{
 	inverseJoinColumns = @JoinColumn (name="image_id"))
 	private List<UploadFileEntity>image = new ArrayList<>();
 	
+	
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public ProductEntity getProduct() {
 		return product;
 	}

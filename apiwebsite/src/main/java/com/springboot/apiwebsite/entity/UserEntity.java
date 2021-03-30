@@ -8,18 +8,14 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,17 +37,19 @@ public class UserEntity extends BasicEntitySuper{
 	private String userName;
 	@JsonBackReference
 	@Column(name="password")
+	@NotBlank(message = "Không được null password")
 	private String password;
 	@Column(name="email",unique = true)
+	@NotNull(message = "Email Null ")
 	@Pattern(regexp = "^(.+)@(.+)$",message = "Email không hợp lệ")
 	private String email;
 	@Column(name="isenabled",columnDefinition = "default 0")
-	@NotNull(message = "Không null")
 	private boolean isEnabled;
 	@ManyToMany(mappedBy = "user",fetch = FetchType.EAGER)
 	private List<RoleEntity> role;
 	@OneToMany(mappedBy = "user")
 	private List<InvoiceEntity> invoice;
+
 	public boolean isEnabled() {
 		return isEnabled;
 	}
