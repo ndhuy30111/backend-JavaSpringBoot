@@ -15,9 +15,20 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@Getter
+@Setter
+@Transactional
+@AllArgsConstructor
+@NoArgsConstructor
 public class BasicEntitySuper {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,7 +48,7 @@ public class BasicEntitySuper {
 	@Column
 	@LastModifiedDate
 	private Date updateDate;
-	@Column(name="status",columnDefinition = "bit default 1")
+	@Column(name="status",columnDefinition = "boolean default true")
 	private boolean status ;
 	public String getCreateBy() {
 		return createBy;
@@ -77,9 +88,5 @@ public class BasicEntitySuper {
 	}
 	public void setName(String name) {
 		this.name = name.trim().replaceAll("( )+", " ");
-	}
-	
-	public void isEnableStatus() {
-		this.status = true;
 	}
 }

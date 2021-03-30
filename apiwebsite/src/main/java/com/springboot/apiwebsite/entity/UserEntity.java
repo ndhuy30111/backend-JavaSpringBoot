@@ -16,12 +16,23 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "user")
+@Getter
+@Setter
+@Transactional
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserEntity extends BasicEntitySuper{
 	
 	@Column(name = "username",length = 50,unique = true)
@@ -82,10 +93,6 @@ public class UserEntity extends BasicEntitySuper{
 		return password;
 	}
 	public void setPassword(String password) {
-		
-		this.password = password;
-	}
-	public void hashPassword() {
 		BCryptPasswordEncoder bcry = new BCryptPasswordEncoder();
 		 this.password = bcry.encode(password);
 	}

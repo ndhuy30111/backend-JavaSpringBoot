@@ -20,8 +20,7 @@ public class UrlEntitySuper extends BasicEntitySuper{
 		return url;
 	}
 	public void setUrl(String url) {
-		Slugify slg = new Slugify();
-		String result = slg.slugify(url);
-		this.url = result;
+		this.url = new Slugify().slugify(this.getName());
 	}
+
 }

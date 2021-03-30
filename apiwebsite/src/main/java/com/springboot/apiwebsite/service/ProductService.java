@@ -33,11 +33,6 @@ public class ProductService implements ProductServiceImpl{
 	@Override
 	@Transactional
 	public ProductEntity save(@Valid ProductEntity productEntity) {
-	
-		productEntity.setUrl(productEntity.getName());
-		productEntity.setStatus(true);
-		
-	
 		return productRepository.save(productEntity);
 	}
 

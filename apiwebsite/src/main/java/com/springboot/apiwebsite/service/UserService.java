@@ -41,8 +41,6 @@ public class UserService implements UserServiceImpl{
 			 {
 				 throw new BadRequestEx("tai khoan khong hop le");
 			 }
-			userEntity.hashPassword();
-			userEntity.isEnableStatus();
 			return entityRepository.save(userEntity);	
 		}catch(Exception ex) {
 			throw new BadRequestEx(ex.getMessage());

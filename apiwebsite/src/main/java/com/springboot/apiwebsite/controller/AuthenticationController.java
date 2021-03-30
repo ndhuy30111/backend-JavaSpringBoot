@@ -56,8 +56,8 @@ public class AuthenticationController {
 		}
 		final UserDetails userDetails = myUserDetailsService.loadUserByUsername(authenticationRequest.getUserName());
 		final String jwt = jwtTokenUtil.generateToken(userDetails);
-		Date date = jwtTokenUtil.extractExpiration(jwt);
-		return ResponseEntity.ok(new AuthenticationResponse(jwt,date));
+		
+		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
 	@PostMapping("/api/profile")
 	public ResponseEntity<?>profileUser(@Valid @RequestBody AuthenticationResponse auth){
