@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.springboot.apiwebsite.controller.AuthenticationController;
 import com.springboot.apiwebsite.entity.UserEntity;
 import com.springboot.apiwebsite.exception.AccountEx;
 import com.springboot.apiwebsite.repository.EntityRepository;
@@ -18,7 +19,6 @@ import com.springboot.apiwebsite.service.impl.UserServiceImpl;
 public class UserService implements UserServiceImpl{
 	@Autowired
 	EntityRepository entityRepository;
-	
 	@Override
 	public UserEntity getFindUserName(String userName) {
 		if(userName != null) {
@@ -47,6 +47,7 @@ public class UserService implements UserServiceImpl{
 			BCryptPasswordEncoder bcry = new BCryptPasswordEncoder();
 			String passwordnew =  bcry.encode(userEntity.getPassword());
 			userEntity.setStatus(true);
+			userEntity.setEnabled(false);
 			userEntity.setPassword(passwordnew);
 			return entityRepository.save(userEntity);	
 		}catch(Exception ex) {

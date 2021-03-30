@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.springboot.apiwebsite.entity.VerificationUserEntity;
 
-public interface VerificationEmailReponsitory extends CrudRepository<VerificationUserEntity, String> {
-VerificationUserEntity findByconfirmationToken(String  confirmationToken);
+public interface VerificationEmailReponsitory extends JpaRepository<VerificationUserEntity, Long> {
+  
+	VerificationUserEntity findOneByConfirmationToken(String confirmationToken);
 }

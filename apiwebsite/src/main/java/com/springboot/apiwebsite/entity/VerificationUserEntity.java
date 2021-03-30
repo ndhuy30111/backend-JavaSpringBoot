@@ -15,8 +15,17 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name="VerificationUser")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class VerificationUserEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -68,6 +77,18 @@ public class VerificationUserEntity {
 	}
 
 	public void setUserEntity(UserEntity userEntity) {
+		this.userEntity = userEntity;
+	}
+
+	public VerificationUserEntity() {
+		super();
+	}
+
+	public VerificationUserEntity(long tokenid, String confirmationToken, Date createdDate, UserEntity userEntity) {
+		super();
+		this.tokenid = tokenid;
+		this.confirmationToken = confirmationToken;
+		this.createdDate = createdDate;
 		this.userEntity = userEntity;
 	}
 

@@ -29,6 +29,7 @@ import com.springboot.apiwebsite.repository.VerificationEmailReponsitory;
 import com.springboot.apiwebsite.service.MyUserDetailsService;
 import com.springboot.apiwebsite.service.SendMailService;
 import com.springboot.apiwebsite.service.UserService;
+import com.springboot.apiwebsite.service.VerificationEmailService;
 import com.springboot.apiwebsite.util.JwtUtil;
 
 
@@ -43,6 +44,8 @@ public class AuthenticationController {
 	private JwtUtil jwtTokenUtil;
 	@Autowired
 	private UserService userService;
+	@Autowired 
+	private VerificationEmailService verificationEmailService;
 	@Autowired
 	private VerificationEmailReponsitory verificationEmailReponsitory;
 	@Autowired
@@ -73,8 +76,8 @@ public class AuthenticationController {
 	}
 	@PostMapping("/api/dangky")
 	public ResponseEntity<?>createUser( @RequestBody UserEntity user) throws Exception{
-		   UserEntity userEntityNew = userService.save(user);
-			VerificationUserEntity verificationUserEntity = new VerificationUserEntity(userEntityNew);
+		    UserEntity userEntityNew = userService.save(user);
+		   	VerificationUserEntity verificationUserEntity = new VerificationUserEntity(userEntityNew);
 			verificationEmailReponsitory.save(verificationUserEntity);
 			SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(user.getEmail());
@@ -82,15 +85,20 @@ public class AuthenticationController {
             mailMessage.setFrom("ttemp5478@gmail.com");
             mailMessage.setText("To confirm your account, please click here : "
             +"http://localhost:8080/api/verification?token="+verificationUserEntity.getConfirmationToken());
-            sendMailService.sendEmail(mailMessage);
-            
+            sendMailService.sendEmail(mailMessage);          
 			return new ResponseEntity<>(userEntityNew,HttpStatus.CREATED);	
 	}
 	@GetMapping("/api/verification")
-			public ResponseEntity<?> verification(@RequestParam(value = "token") String token)
-			{
-		
-				return new ResponseEntity<>(HttpStatus.OK);
+			public ResponseEntity<?>verification(@RequestParam(value = "token") String token)
+			{	
+		 		VerificationUserEntity verificationUserEntity = verificationEmailService.getVerificationToken(token);
+		 		if(verificationUserEntity!=null) {
+
+			 		UserEntity userEntity = verificationUserEntity.getUserEntity();
+			 		userEntity.setEnabled(true);
+					return new ResponseEntity<>(userService.save(userEntity),HttpStatus.OK);
+		 		}
+		 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
 	
 	@GetMapping("/api/account")
