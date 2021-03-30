@@ -9,6 +9,8 @@ import javax.persistence.MappedSuperclass;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.github.slugify.Slugify;
+
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class UrlEntitySuper extends BasicEntitySuper{
@@ -18,6 +20,7 @@ public class UrlEntitySuper extends BasicEntitySuper{
 		return url;
 	}
 	public void setUrl(String url) {
-		this.url = url;
+		this.url = new Slugify().slugify(this.getName());
 	}
+
 }

@@ -19,11 +19,13 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "color")
 public class ColorEntity extends UrlEntitySuper{
 
+
 	@Column(name="code")
 	private String code;
 	public String getCode() {
 		return code;
-	}
+		}
+
 	public void setCode(String code) {
 		this.code = code;
 	}

@@ -33,17 +33,15 @@ public class UserService implements UserServiceImpl{
 			if(getFindUserByEmail(userEntity.getEmail())!=null) {
 				throw new BadRequestEx("Email Da Ton tai");
 			}
-			if(!userEntity.getEmail().matches("^(.+)@(.+)$")) {
-				throw new BadRequestEx("Email khong hop le !");
-			}
 			if(getFindUserName(userEntity.getUserName())!=null) {
 				throw new BadRequestEx("user name da ton tai ");
 			}
 			 String userName = userEntity.getUserName();
-			 if(userName.matches(".*\\s+.*")||!userName.matches("^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$"))
+			 if(userName.matches(".*\\s+.*"))
 			 {
 				 throw new BadRequestEx("tai khoan khong hop le");
 			 }
+
 			BCryptPasswordEncoder bcry = new BCryptPasswordEncoder();
 			String passwordnew =  bcry.encode(userEntity.getPassword());
 			userEntity.setStatus(true);

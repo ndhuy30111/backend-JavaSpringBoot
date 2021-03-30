@@ -12,43 +12,54 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "user")
+@Getter
+@Setter
+@Transactional
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserEntity extends BasicEntitySuper{
 	
 	@Column(name = "username",length = 50,unique = true)
 	@NotNull(message = "Bạn không được để null Username")
+	@Pattern(regexp = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$",message = "User Name không hợp lệ")
 	private String userName;
 	@JsonBackReference
 	@Column(name="password")
 	private String password;
 	@Column(name="email",unique = true)
-	@NotNull(message = "khong de trong")
+	@Pattern(regexp = "^(.+)@(.+)$",message = "Email không hợp lệ")
 	private String email;
-	@Column(name="isenabled" , columnDefinition = "default 0")
+	@Column(name="isenabled",columnDefinition = "default 0")
 	@NotNull(message = "Không null")
 	private boolean isEnabled;
 	@ManyToMany(mappedBy = "user",fetch = FetchType.EAGER)
 	private List<RoleEntity> role;
 	@OneToMany(mappedBy = "user")
 	private List<InvoiceEntity> invoice;
-
-	
-	
 	public boolean isEnabled() {
 		return isEnabled;
 	}
-	public void setEnabled(boolean isEnabled) {
-		this.isEnabled = isEnabled;
-	}
 	public String getEmail() {
 		return email;
+	}
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
 	}
 	public void setEmail(String email) {
 		this.email = email;
@@ -60,8 +71,6 @@ public class UserEntity extends BasicEntitySuper{
 	public void setRole(List<RoleEntity> role) {
 		this.role = role;
 	}
-	
-
 
 	public List<InvoiceEntity> getInvoice() {
 		return invoice;
@@ -80,7 +89,9 @@ public class UserEntity extends BasicEntitySuper{
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		BCryptPasswordEncoder bcry = new BCryptPasswordEncoder();
+		 this.password = bcry.encode(password);
 	}
+	
 	
 }

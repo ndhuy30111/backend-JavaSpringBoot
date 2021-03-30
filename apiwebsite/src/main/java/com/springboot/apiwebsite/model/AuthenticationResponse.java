@@ -4,10 +4,16 @@ import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
 
+import com.springboot.apiwebsite.util.JwtUtil;
+
 public class AuthenticationResponse {
 	@NotBlank(message = "Jwt của bạn trống")
 	private String jwt;
 	private Date date;
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	public String getJwt() {
 		return jwt;
 	}
@@ -17,17 +23,16 @@ public class AuthenticationResponse {
 	}
 
 	public Date getDate() {
+		
 		return date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
 
-	public AuthenticationResponse(String jwt,Date date) {
+
+	public AuthenticationResponse(String jwt) {
 		super();
 		this.jwt = jwt;
-		this.date= date;
+		date = new JwtUtil().extractExpiration(jwt);
 	}
 	
 }

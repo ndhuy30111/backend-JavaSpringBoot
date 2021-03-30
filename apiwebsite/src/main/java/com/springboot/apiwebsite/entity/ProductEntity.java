@@ -15,14 +15,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
 @Table(name="product")
 @Getter
 @Setter
 @Transactional
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductEntity extends UrlEntitySuper{
+
 	@Column(name = "price",columnDefinition = "bigint(20) default 0 ")
 	@Min(value = 1000,message = "Số tiền bán phải trên 1000")
 	private Long price;

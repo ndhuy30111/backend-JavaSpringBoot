@@ -1,7 +1,5 @@
 package com.springboot.apiwebsite.controller;
 
-import java.util.Date;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.apiwebsite.entity.UserEntity;
-import com.springboot.apiwebsite.exception.BadRequestEx;
 import com.springboot.apiwebsite.entity.VerificationUserEntity;
+import com.springboot.apiwebsite.exception.BadRequestEx;
 import com.springboot.apiwebsite.model.AuthenticationRequest;
 import com.springboot.apiwebsite.model.AuthenticationResponse;
 import com.springboot.apiwebsite.repository.VerificationEmailReponsitory;
@@ -59,8 +57,8 @@ public class AuthenticationController {
 		}
 		final UserDetails userDetails = myUserDetailsService.loadUserByUsername(authenticationRequest.getUserName());
 		final String jwt = jwtTokenUtil.generateToken(userDetails);
-		Date date = jwtTokenUtil.extractExpiration(jwt);
-		return ResponseEntity.ok(new AuthenticationResponse(jwt,date));
+		
+		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
 	@PostMapping("/api/profile")
 	public ResponseEntity<?>profileUser(@Valid @RequestBody AuthenticationResponse auth){

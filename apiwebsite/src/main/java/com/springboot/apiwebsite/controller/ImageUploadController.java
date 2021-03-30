@@ -45,8 +45,7 @@ public class ImageUploadController {
 	    @PostMapping("/uploadFile")
 	    public UploadFileEntity uploadFile(@Valid @RequestParam("file") MultipartFile file,@RequestParam("color") String color) throws JsonMappingException, JsonProcessingException {
 	        String fileName = fileStorageService.storeFile(file);
-	        ColorEntity colorNew;
-			colorNew = new ObjectMapper().readValue(color,ColorEntity.class);
+	        ColorEntity colorNew = new ObjectMapper().readValue(color,ColorEntity.class);
 			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 	                .path("/api/downloadFile/")
 	                .path(fileName)
