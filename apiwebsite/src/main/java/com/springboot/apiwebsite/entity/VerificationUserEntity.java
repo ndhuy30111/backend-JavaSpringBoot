@@ -38,10 +38,9 @@ public class VerificationUserEntity {
     private long tokenid;
     @Column(name="confirmation_token")
     private String confirmationToken;
-    
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER,targetEntity = UserEntity.class)
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
