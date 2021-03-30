@@ -17,4 +17,5 @@ public interface ProductRepository  extends JpaRepository<ProductEntity, Long> {
 	ProductEntity findOneByUrl(String url);
 	@Query(value="SELECT * FROM product p WHERE p.name LIKE %?1%",nativeQuery = true)
 	List<ProductEntity> findByNameLike(String name);
+	ProductEntity findOneByName(String name);
 }

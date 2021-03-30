@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.github.slugify.Slugify;
 import com.springboot.apiwebsite.entity.ColorEntity;
 import com.springboot.apiwebsite.entity.ProductEntity;
 import com.springboot.apiwebsite.exception.BadRequestEx;
@@ -32,7 +33,8 @@ public class ProductService implements ProductServiceImpl{
 	@Override
 	@Transactional
 	public ProductEntity save(@Valid ProductEntity productEntity) {
-		productEntity.setUrl(SlugUtil.makeSlug(productEntity.getName()));
+	
+		productEntity.setUrl(productEntity.getName());
 		productEntity.setStatus(true);
 		
 	
@@ -70,6 +72,12 @@ public class ProductService implements ProductServiceImpl{
 	public List<ProductEntity> getProduct(String name)
 	{
 		return productRepository.findByNameLike(name);
+	}
+
+	@Override
+	public ProductEntity findOneByName(String name) {
+		// TODO Auto-generated method stub
+		return productRepository.findOneByName(name);
 	}
 
 	

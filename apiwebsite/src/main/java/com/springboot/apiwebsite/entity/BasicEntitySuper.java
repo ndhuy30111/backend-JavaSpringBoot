@@ -78,4 +78,8 @@ public class BasicEntitySuper {
 	public void setName(String name) {
 		this.name = name.trim().replaceAll("( )+", " ");
 	}
+	
+	public void isEnableStatus() {
+		this.status = true;
+	}
 }

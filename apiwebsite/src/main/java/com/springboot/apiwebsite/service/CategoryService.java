@@ -42,7 +42,7 @@ public class CategoryService implements CategoryServiceImpl {
 	@Override
 	public CategoryEntity save(CategoryEntity t) {
 		t.setStatus(true);
-		t.setUrl(SlugUtil.makeSlug(t.getName().trim()));
+		t.setUrl(t.getName().trim());
 		return categoryRepository.save(t);
 	}
 
