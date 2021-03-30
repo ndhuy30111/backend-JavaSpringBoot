@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -41,20 +42,22 @@ public class UserEntity extends BasicEntitySuper{
 	private String userName;
 	@JsonBackReference
 	@Column(name="password")
+	@NotBlank(message = "Không được null password")
 	private String password;
 	@Column(name="email",unique = true)
+	@NotNull(message = "Email Null ")
 	@Pattern(regexp = "^(.+)@(.+)$",message = "Email không hợp lệ")
 	private String email;
-	@Column(name="isEnabled")
-	@NotNull(message = "Không null")
+	@Column(name="isenabled",columnDefinition = "default 0")
 	private boolean isEnabled;
-	
-	
 	@ManyToMany(mappedBy = "user",fetch = FetchType.EAGER)
 	private List<RoleEntity> role;
 	@OneToMany(mappedBy = "user")
 	private List<InvoiceEntity> invoice;
-
+	
+	
+	
+	
 	public boolean isEnabled() {
 		return isEnabled;
 	}
@@ -74,8 +77,6 @@ public class UserEntity extends BasicEntitySuper{
 	public void setRole(List<RoleEntity> role) {
 		this.role = role;
 	}
-
-
 	public List<InvoiceEntity> getInvoice() {
 		return invoice;
 	}
