@@ -22,34 +22,44 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+
+@Entity
+@Table(name="verification_user")
 @Getter
 @Setter
 @Transactional
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name="verificationuser")
 public class VerificationUserEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="token_id")
     private long tokenid;
-
     @Column(name="confirmation_token")
     private String confirmationToken;
-
+    
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-
-    @OneToOne(targetEntity = UserEntity.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "user_id")
-    private UserEntity userEntity;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     public VerificationUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
+        this.user = userEntity;
         createdDate = new Date();
         confirmationToken = UUID.randomUUID().toString();
     }
+    
+
+	public VerificationUserEntity(long tokenid, String confirmationToken, Date createdDate, UserEntity user) {
+		super();
+		this.tokenid = tokenid;
+		this.confirmationToken = confirmationToken;
+		this.createdDate = createdDate;
+		this.user = user;
+	}
+
 
 	public long getTokenid() {
 		return tokenid;
@@ -75,24 +85,15 @@ public class VerificationUserEntity {
 		this.createdDate = createdDate;
 	}
 
-	public UserEntity getUserEntity() {
-		return userEntity;
+	public UserEntity getUser() {
+		return user;
 	}
 
-	public void setUserEntity(UserEntity userEntity) {
-		this.userEntity = userEntity;
+	public void setUser(UserEntity user) {
+		this.user = user;
 	}
 
-	public VerificationUserEntity() {
-		super();
-	}
-
-	public VerificationUserEntity(long tokenid, String confirmationToken, Date createdDate, UserEntity userEntity) {
-		super();
-		this.tokenid = tokenid;
-		this.confirmationToken = confirmationToken;
-		this.createdDate = createdDate;
-		this.userEntity = userEntity;
-	}
+	
+	
 
 }

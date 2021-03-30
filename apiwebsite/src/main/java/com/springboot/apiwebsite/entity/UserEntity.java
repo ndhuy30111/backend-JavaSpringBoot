@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -35,21 +36,37 @@ public class UserEntity extends BasicEntitySuper{
 	@NotNull(message = "Bạn không được để null Username")
 	@Pattern(regexp = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$",message = "User Name không hợp lệ")
 	private String userName;
+	
 	@JsonBackReference
 	@Column(name="password")
 	@NotBlank(message = "Không được null password")
 	private String password;
+	
 	@Column(name="email",unique = true)
 	@NotNull(message = "Email Null ")
 	@Pattern(regexp = "^(.+)@(.+)$",message = "Email không hợp lệ")
 	private String email;
-	@Column(name="isenabled",columnDefinition = "default 0")
+	
+	@Column(name="isenabled",columnDefinition = "boolean default 0")
 	private boolean isEnabled;
+	
 	@ManyToMany(mappedBy = "user",fetch = FetchType.EAGER)
 	private List<RoleEntity> role;
+	
 	@OneToMany(mappedBy = "user")
 	private List<InvoiceEntity> invoice;
-
+	
+	@OneToOne(mappedBy = "user")
+	VerificationUserEntity verificationUserEntity;
+	
+	
+	
+	public VerificationUserEntity getVerificationUserEntity() {
+		return verificationUserEntity;
+	}
+	public void setVerificationUserEntity(VerificationUserEntity verificationUserEntity) {
+		this.verificationUserEntity = verificationUserEntity;
+	}
 	public boolean isEnabled() {
 		return isEnabled;
 	}

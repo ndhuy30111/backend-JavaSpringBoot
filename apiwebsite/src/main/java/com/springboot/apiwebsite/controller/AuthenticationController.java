@@ -92,7 +92,7 @@ public class AuthenticationController {
 		 		VerificationUserEntity verificationUserEntity = verificationEmailService.getVerificationToken(token);
 		 		if(verificationUserEntity!=null) {
 
-			 		UserEntity userEntity = verificationUserEntity.getUserEntity();
+			 		UserEntity userEntity = verificationUserEntity.getUser();
 			 		
 					return new ResponseEntity<>(userService.isEnabled(userEntity),HttpStatus.OK);
 		 		}
