@@ -78,6 +78,11 @@ public class UserService implements UserServiceImpl{
 		// TODO Auto-generated method stub
 		return entityRepository.findOneByEmail(email);
 	}
+	@Override
+	public UserEntity isEnabled(UserEntity userEntity) {
+		userEntity.setEnabled(true);
+		return entityRepository.save(userEntity);
+	}
 	
 	
 	

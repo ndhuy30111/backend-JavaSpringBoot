@@ -29,6 +29,7 @@ public class UserEntity extends BasicEntitySuper{
 	@Column(name="password")
 	private String password;
 	@Column(name="email",unique = true)
+	@NotNull(message = "khong de trong")
 	private String email;
 	@Column(name="isEnabled")
 	@NotNull(message = "Không null")

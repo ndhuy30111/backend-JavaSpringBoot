@@ -95,8 +95,8 @@ public class AuthenticationController {
 		 		if(verificationUserEntity!=null) {
 
 			 		UserEntity userEntity = verificationUserEntity.getUserEntity();
-			 		userEntity.setEnabled(true);
-					return new ResponseEntity<>(userService.save(userEntity),HttpStatus.OK);
+			 		
+					return new ResponseEntity<>(userService.isEnabled(userEntity),HttpStatus.OK);
 		 		}
 		 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
