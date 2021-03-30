@@ -70,16 +70,12 @@ public class ProductController {
 	}
 
 	@PostMapping
-	@Transactional
-	public ResponseEntity<?> save(@Valid @RequestParam(value = "product") String product,
+	public ResponseEntity<?> save( @RequestParam(value = "product") String product,
 			@RequestParam(name = "file", required = false) MultipartFile[] file)
 			throws Exception, ValidationException, ValidationException {
-
 			try {
 			ProductEntity productEntity = new ObjectMapper().readValue(product, ProductEntity.class);	
-			
 			ProductEntity productnew = productService.save(productEntity);
-			
 			for(ColorEntity itemColor : productnew.getColor()) {
 				itemColor.setProduct(productnew);
 				ColorEntity colorNew = colorService.save(itemColor);
@@ -117,7 +113,7 @@ public class ProductController {
 			}
 			return new ResponseEntity<>(productnew,HttpStatus.CREATED);
 		} catch (Exception e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
 		}
 	}

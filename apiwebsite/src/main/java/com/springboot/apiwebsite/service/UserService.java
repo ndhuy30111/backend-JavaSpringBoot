@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.springboot.apiwebsite.controller.AuthenticationController;
 import com.springboot.apiwebsite.entity.UserEntity;
-import com.springboot.apiwebsite.exception.AccountEx;
+import com.springboot.apiwebsite.exception.BadRequestEx;
 import com.springboot.apiwebsite.repository.EntityRepository;
 import com.springboot.apiwebsite.service.impl.UserServiceImpl;
 
@@ -28,21 +28,21 @@ public class UserService implements UserServiceImpl{
 	}
 	@Override
 	@Transactional
-	public UserEntity save(@Valid UserEntity userEntity) throws AccountEx{
+	public UserEntity save(@Valid UserEntity userEntity) throws BadRequestEx{
 		try {
 			if(getFindUserByEmail(userEntity.getEmail())!=null) {
-				throw new AccountEx("Email Da Ton tai");
+				throw new BadRequestEx("Email Da Ton tai");
 			}
 			if(!userEntity.getEmail().matches("^(.+)@(.+)$")) {
-				throw new AccountEx("Email khong hop le !");
+				throw new BadRequestEx("Email khong hop le !");
 			}
 			if(getFindUserName(userEntity.getUserName())!=null) {
-				throw new AccountEx("user name da ton tai ");
+				throw new BadRequestEx("user name da ton tai ");
 			}
 			 String userName = userEntity.getUserName();
 			 if(userName.matches(".*\\s+.*")||!userName.matches("^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$"))
 			 {
-				 throw new AccountEx("tai khoan khong hop le");
+				 throw new BadRequestEx("tai khoan khong hop le");
 			 }
 			BCryptPasswordEncoder bcry = new BCryptPasswordEncoder();
 			String passwordnew =  bcry.encode(userEntity.getPassword());
@@ -51,7 +51,7 @@ public class UserService implements UserServiceImpl{
 			userEntity.setPassword(passwordnew);
 			return entityRepository.save(userEntity);	
 		}catch(Exception ex) {
-			throw new AccountEx(ex.getMessage());
+			throw new BadRequestEx(ex.getMessage());
 		}	
 	}
 	@Override

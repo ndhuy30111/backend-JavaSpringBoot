@@ -9,12 +9,19 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import lombok.Getter;
+import lombok.Setter;
 @Entity
 @Table(name="product")
+@Getter
+@Setter
+@Transactional
 public class ProductEntity extends UrlEntitySuper{
 	@Column(name = "price",columnDefinition = "bigint(20) default 0 ")
 	@Min(value = 1000,message = "Số tiền bán phải trên 1000")
