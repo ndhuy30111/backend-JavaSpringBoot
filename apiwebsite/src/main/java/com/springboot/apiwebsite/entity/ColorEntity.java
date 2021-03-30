@@ -19,14 +19,13 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "color")
 public class ColorEntity extends UrlEntitySuper{
 
-	@Column(name="tag_NameColor")
-	private String tagNameColor;
-	public String getTagNameColor() {
-		return tagNameColor;
+	@Column(name="code")
+	private String code;
+	public String getCode() {
+		return code;
 	}
-
-	public void setTagNameColor(String tagNameColor) {
-		this.tagNameColor = tagNameColor;
+	public void setCode(String code) {
+		this.code = code;
 	}
 	@ManyToOne
 	@JoinColumn(columnDefinition = "product_id")

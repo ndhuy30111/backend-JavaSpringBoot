@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="VerificationUser")
+@Table(name="verificationuser")
 @Getter
 @Setter
 @AllArgsConstructor

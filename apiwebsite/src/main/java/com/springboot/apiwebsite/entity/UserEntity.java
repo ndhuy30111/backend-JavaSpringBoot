@@ -31,9 +31,16 @@ public class UserEntity extends BasicEntitySuper{
 	@Column(name="email",unique = true)
 	@NotNull(message = "khong de trong")
 	private String email;
-	@Column(name="isEnabled")
+	@Column(name="isenabled" , columnDefinition = "default 0")
 	@NotNull(message = "Không null")
 	private boolean isEnabled;
+	@ManyToMany(mappedBy = "user",fetch = FetchType.EAGER)
+	private List<RoleEntity> role;
+	@OneToMany(mappedBy = "user")
+	private List<InvoiceEntity> invoice;
+
+	
+	
 	public boolean isEnabled() {
 		return isEnabled;
 	}
@@ -54,10 +61,6 @@ public class UserEntity extends BasicEntitySuper{
 		this.role = role;
 	}
 	
-	@ManyToMany(mappedBy = "user",fetch = FetchType.EAGER)
-	private List<RoleEntity> role;
-	@OneToMany(mappedBy = "user")
-	private List<InvoiceEntity> invoice;
 
 
 	public List<InvoiceEntity> getInvoice() {

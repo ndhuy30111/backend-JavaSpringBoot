@@ -84,7 +84,7 @@ public class AuthenticationController {
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setFrom("ttemp5478@gmail.com");
             mailMessage.setText("To confirm your account, please click here : "
-            +"http://localhost:8080/api/verification?token="+verificationUserEntity.getConfirmationToken());
+            +"http://103.146.23.233/api/verification?token="+verificationUserEntity.getConfirmationToken());
             sendMailService.sendEmail(mailMessage);          
 			return new ResponseEntity<>(userEntityNew,HttpStatus.CREATED);	
 	}
