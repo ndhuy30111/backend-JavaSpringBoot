@@ -52,7 +52,7 @@ public class UrlEntitySuper {
 	@Column
 	@LastModifiedDate
 	private Date updateDate;
-	@Column(name="status",columnDefinition = "boolean default true")
+	@Column(name="status",columnDefinition = "boolean default 1")
 	private boolean status ;
 	@Column(name="url",columnDefinition = "text")
 	private String url ;

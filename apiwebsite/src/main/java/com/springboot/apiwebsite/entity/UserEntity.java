@@ -60,6 +60,7 @@ public class UserEntity extends BasicEntitySuper{
 	
 	@JsonIgnore
 	@OneToOne(mappedBy = "user")
+	@JsonBackReference
 	VerificationUserEntity verificationUserEntity;
 	
 	
