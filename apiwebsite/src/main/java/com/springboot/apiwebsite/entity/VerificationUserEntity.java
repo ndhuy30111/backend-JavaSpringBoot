@@ -51,6 +51,11 @@ public class VerificationUserEntity {
     }
     
 
+	public VerificationUserEntity() {
+		super();
+	}
+
+
 	public VerificationUserEntity(long tokenid, String confirmationToken, Date createdDate, UserEntity user) {
 		super();
 		this.tokenid = tokenid;

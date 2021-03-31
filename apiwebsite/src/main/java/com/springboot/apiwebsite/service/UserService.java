@@ -42,11 +42,7 @@ public class UserService implements UserServiceImpl{
 				 throw new BadRequestEx("tai khoan khong hop le");
 			 }
 
-			BCryptPasswordEncoder bcry = new BCryptPasswordEncoder();
-			String passwordnew =  bcry.encode(userEntity.getPassword());
 			userEntity.setStatus(true);
-			userEntity.setEnabled(false);
-			userEntity.setPassword(passwordnew);
 			return entityRepository.save(userEntity);	
 		}catch(Exception ex) {
 			throw new BadRequestEx(ex.getMessage());
