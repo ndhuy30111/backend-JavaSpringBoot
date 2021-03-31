@@ -10,16 +10,21 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@CrossOrigin
 @Entity
 @Table(name = "category")
 public class CategoryEntity extends UrlEntitySuper{
 	
+	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name="category_product",joinColumns = @JoinColumn(name="category_id"),
 	inverseJoinColumns = @JoinColumn (name="product_id"))
-	
+	@JsonIgnore
 	private List<ProductEntity> product;
 
 	

@@ -68,6 +68,11 @@ public class VerificationUserEntity {
 		this.tokenid = tokenid;
 	}
 
+	public VerificationUserEntity() {
+		super();
+	}
+
+
 	public String getConfirmationToken() {
 		return confirmationToken;
 	}

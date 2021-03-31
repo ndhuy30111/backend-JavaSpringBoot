@@ -15,8 +15,10 @@ import javax.validation.constraints.Pattern;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -56,6 +58,7 @@ public class UserEntity extends BasicEntitySuper{
 	@OneToMany(mappedBy = "user")
 	private List<InvoiceEntity> invoice;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy = "user")
 	VerificationUserEntity verificationUserEntity;
 	
