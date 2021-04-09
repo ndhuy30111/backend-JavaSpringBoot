@@ -1,5 +1,7 @@
 package com.springboot.apiwebsite.controller;
 
+import java.util.ArrayList;
+
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 
@@ -50,7 +52,10 @@ public class ProductController {
 
 	@GetMapping("/{url}")
 	public ResponseEntity<?> findByUrl(@PathVariable String url) {
-		return new ResponseEntity<>(productService.findtByUrlOne(url), HttpStatus.OK);
+		ProductEntity entity = productService.findtByUrlOne(url);
+		
+		entity.setCategory(productService.getCategoryProduct(url));
+		return new ResponseEntity<>(entity.toString(), HttpStatus.OK);
 	}
 
 	@GetMapping

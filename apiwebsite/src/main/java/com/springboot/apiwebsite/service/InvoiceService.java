@@ -41,7 +41,7 @@ public class InvoiceService implements InvoiceServiceImpl {
 	      return null;
 	    }
 		t.setName(UUID.randomUUID()+"");
-		UserEntity userEntity = entityRepository.findByUserName(authentication.getName());
+		UserEntity userEntity = entityRepository.findOneByUserName(authentication.getName());
 		t.setUser(userEntity);
 		return invoiceReponsoty.save(t);
 	}

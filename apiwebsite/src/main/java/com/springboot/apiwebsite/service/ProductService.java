@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.github.slugify.Slugify;
+import com.springboot.apiwebsite.entity.CategoryEntity;
 import com.springboot.apiwebsite.entity.ColorEntity;
 import com.springboot.apiwebsite.entity.ProductEntity;
 import com.springboot.apiwebsite.exception.BadRequestEx;
@@ -32,7 +33,11 @@ public class ProductService implements ProductServiceImpl{
 
 	@Override
 	@Transactional
-	public ProductEntity save(@Valid ProductEntity productEntity) {
+	public ProductEntity save(@Valid ProductEntity productEntity)throws BadRequestEx {
+		if(findOneByName(productEntity.getName())!=null)
+		{
+			throw new BadRequestEx("Tên sản phẩm đã tồn tại");
+		}
 		return productRepository.save(productEntity);
 	}
 
@@ -53,6 +58,7 @@ public class ProductService implements ProductServiceImpl{
 
 	@Override
 	public ProductEntity findtByUrlOne(String url) {
+	
 		
 		return productRepository.findOneByUrl(url);
 	}
@@ -66,13 +72,21 @@ public class ProductService implements ProductServiceImpl{
 	}
 	public List<ProductEntity> getProduct(String name)
 	{
+		
 		return productRepository.findByNameLike(name);
 	}
 
 	@Override
 	public ProductEntity findOneByName(String name) {
 		// TODO Auto-generated method stub
-		return productRepository.findOneByName(name);
+		ProductEntity productEntity = productRepository.findOneByName(name);
+		productEntity.setCategory(productRepository.findOneByName(name).getCategory());
+		return productEntity;
+	}
+
+	@Override
+	public List<CategoryEntity> getCategoryProduct(String url) {		 
+		return findtByUrlOne(url).getCategory();
 	}
 
 	

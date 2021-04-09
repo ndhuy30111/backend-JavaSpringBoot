@@ -103,6 +103,18 @@ public class UrlEntitySuper {
 	public void setUrl(String url) {
 		this.url = SlugUtil.makeSlug(name);
 	}
+	@Override
+	public String toString() {
+		return "{ \"id\" : \"" + id + "\",\"name\" : \"" + name + "\",\"createBy\" : \"" + createBy
+				+ "\",\"updateBy\" : \"" + updateBy + "\",\"createDate\" : \"" + createDate + "\",\"updateDate\" : \""
+				+ updateDate + "\",\"status\" : \"" + status + "\",\"url\" : \"" + url + "\" }";
+	}
+
+
+
+
+
+
 	
 	
 }
