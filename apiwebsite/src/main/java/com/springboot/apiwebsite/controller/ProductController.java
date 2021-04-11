@@ -1,5 +1,7 @@
 package com.springboot.apiwebsite.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 
@@ -75,9 +77,16 @@ public class ProductController {
 		try {
 		
 			ProductEntity productEntity = new ObjectMapper().readValue(product, ProductEntity.class);
-			ProductEntity productFind = productService.findOneByName(productEntity.getName());
-			if(productFind==null) {
+			List<CategoryEntity> listCategory = productEntity.getCategory();
+			if(productService.findOneByName(productEntity.getName())==null) {
 				ProductEntity productnew = productService.save(productEntity);
+					for(CategoryEntity categoryEntity : listCategory) {
+						CategoryEntity categoryFind = categoryService.findByIdOne(categoryEntity.getId());
+						if(categoryFind!=null) {
+							categoryFind.getProduct().add(productnew);
+							categoryService.save(categoryFind);
+						}
+					}
 				try {
 					for (ColorEntity itemColor : productnew.getColor()) {
 						itemColor.setProduct(productnew);
@@ -111,20 +120,6 @@ public class ProductController {
 				} catch (BadRequestEx ex) {
 					return new ResponseEntity<>(new BadRequestEx("Lỗi Màu sắc"), HttpStatus.BAD_REQUEST);
 				}
-				try {
-					for (CategoryEntity categoryItem : productEntity.getCategory()) {
-						CategoryEntity categoryFind = categoryService.findByIdOne(categoryItem.getId());
-						if (categoryFind != null) {
-							categoryFind.getProduct().add(productnew);
-						}
-						categoryService.save(categoryFind);
-					}
-			}
-				catch(BadRequestEx ex) {
-
-					return new ResponseEntity<>(new BadRequestEx("Lỗi Danh mục"), HttpStatus.BAD_REQUEST);
-				}
-				
 				return new ResponseEntity<>(productnew, HttpStatus.CREATED);
 			}
 		} catch (BadRequestEx e) {

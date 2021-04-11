@@ -74,7 +74,6 @@ public class ProductService implements ProductServiceImpl{
 	public ProductEntity findOneByName(String name) {
 		// TODO Auto-generated method stub
 		ProductEntity productEntity = productRepository.findOneByName(name);
-		productEntity.setCategory(productRepository.findOneByName(name).getCategory());
 		return productEntity;
 	}
 

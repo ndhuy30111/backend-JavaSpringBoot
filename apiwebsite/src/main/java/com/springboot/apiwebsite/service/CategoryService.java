@@ -41,11 +41,7 @@ public class CategoryService implements CategoryServiceImpl {
 	}
 
 	@Override
-	public CategoryEntity save(CategoryEntity t) throws BadRequestEx {
-		if(findByNameOne(t.getName())!=null)
-		{
-			throw new BadRequestEx("Tên danh mục đã tồn tại");
-		}
+	public CategoryEntity save(CategoryEntity t)  {
 		return categoryRepository.save(t);
 	}
 
