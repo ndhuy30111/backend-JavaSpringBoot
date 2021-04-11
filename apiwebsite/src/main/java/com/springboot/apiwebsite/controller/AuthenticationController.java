@@ -2,6 +2,7 @@ package com.springboot.apiwebsite.controller;
 
 import javax.validation.Valid;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.apiwebsite.entity.UserEntity;
 import com.springboot.apiwebsite.entity.VerificationUserEntity;
 import com.springboot.apiwebsite.exception.BadRequestEx;
@@ -47,6 +50,7 @@ public class AuthenticationController {
 	private VerificationEmailReponsitory verificationEmailReponsitory;
 	@Autowired
 	private SendMailService sendMailService;
+	
 	@PostMapping(value = "/api/Authentication")
 	public ResponseEntity<?>createAuthenticationToken(@Valid @RequestBody AuthenticationRequest authenticationRequest)throws Exception{
 		try {
@@ -60,12 +64,14 @@ public class AuthenticationController {
 		
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
-	@PostMapping("/api/profile")
-	public ResponseEntity<?>profileUser(@Valid @RequestBody AuthenticationResponse auth){
+	@GetMapping("/api/profile")
+	public ResponseEntity<?>profileUser(){
 	 try {
-		 String userName = jwtTokenUtil.extractUsername(auth.getJwt());
-		 UserEntity userEntity = userService.getFindUserName(userName);
-		 return new ResponseEntity<>(userEntity,HttpStatus.OK);	
+		 String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+		 UserEntity userEntity =  userService.getFindUserName(principal);
+		 
+		 return new ResponseEntity<>(userEntity
+				 ,HttpStatus.OK);	
 	 }catch(Exception ex) {
 		 throw new BadRequestEx("Không tìm thấy tài khoản");
 	 }			

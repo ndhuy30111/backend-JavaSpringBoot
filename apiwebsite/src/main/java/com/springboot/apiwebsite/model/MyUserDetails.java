@@ -25,6 +25,15 @@ public class MyUserDetails implements UserDetails{
 	public MyUserDetails(UserEntity user) {
 		this.user = user;
 	}
+	
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub

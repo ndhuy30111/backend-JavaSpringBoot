@@ -33,11 +33,7 @@ public class ProductService implements ProductServiceImpl{
 
 	@Override
 	@Transactional
-	public ProductEntity save(@Valid ProductEntity productEntity)throws BadRequestEx {
-		if(findOneByName(productEntity.getName())!=null)
-		{
-			throw new BadRequestEx("Tên sản phẩm đã tồn tại");
-		}
+	public ProductEntity save(ProductEntity productEntity)throws BadRequestEx {
 		return productRepository.save(productEntity);
 	}
 
@@ -58,8 +54,6 @@ public class ProductService implements ProductServiceImpl{
 
 	@Override
 	public ProductEntity findtByUrlOne(String url) {
-	
-		
 		return productRepository.findOneByUrl(url);
 	}
 
