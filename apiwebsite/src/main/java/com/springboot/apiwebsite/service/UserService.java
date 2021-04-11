@@ -22,7 +22,7 @@ public class UserService implements UserServiceImpl{
 	@Override
 	public UserEntity getFindUserName(String userName) {
 		if(userName != null) {
-			return entityRepository.findByUserName(userName);
+			return  entityRepository.findOneByUserName(userName);
 		}
 		return null;
 	}

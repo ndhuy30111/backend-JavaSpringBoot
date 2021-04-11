@@ -89,4 +89,12 @@ public class BasicEntitySuper {
 	public void setName(String name) {
 		this.name = name.trim().replaceAll("( )+", " ");
 	}
+	@Override
+	public String toString() {
+		return "{ \"id\" : \"" + id + "\",\"name\" : \"" + name + "\",\"createBy\" : \"" + createBy
+				+ "\",\"updateBy\" : \"" + updateBy + "\",\"createDate\" : \"" + createDate + "\",\"updateDate\" : \""
+				+ updateDate + "\",\"status\" : \"" + status + "\" }";
+	}
+
+	
 }

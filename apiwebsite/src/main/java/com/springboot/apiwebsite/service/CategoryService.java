@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.springboot.apiwebsite.entity.CategoryEntity;
 import com.springboot.apiwebsite.entity.ProductEntity;
+import com.springboot.apiwebsite.exception.BadRequestEx;
 import com.springboot.apiwebsite.repository.CategoryRepository;
 import com.springboot.apiwebsite.repository.ProductRepository;
 import com.springboot.apiwebsite.service.impl.CategoryServiceImpl;
@@ -40,7 +41,11 @@ public class CategoryService implements CategoryServiceImpl {
 	}
 
 	@Override
-	public CategoryEntity save(CategoryEntity t) {
+	public CategoryEntity save(CategoryEntity t) throws BadRequestEx {
+		if(findByNameOne(t.getName())!=null)
+		{
+			throw new BadRequestEx("Tên danh mục đã tồn tại");
+		}
 		return categoryRepository.save(t);
 	}
 
@@ -77,6 +82,12 @@ public class CategoryService implements CategoryServiceImpl {
 	public CategoryEntity findByUrlOne(String url) {
 		
 		return categoryRepository.findOneByUrl(url);
+	}
+
+	@Override
+	public CategoryEntity findByNameOne(String name) {
+		// TODO Auto-generated method stub
+		return categoryRepository.findOneByName(name);
 	}
 
 }

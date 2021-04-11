@@ -14,7 +14,9 @@ import javax.validation.constraints.Min;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +29,7 @@ import lombok.Setter;
 @Transactional
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonFormat
 public class ProductEntity extends UrlEntitySuper{
 
 	@Column(name = "price",columnDefinition = "bigint(20) default 0 ")
@@ -90,6 +93,12 @@ public class ProductEntity extends UrlEntitySuper{
 	public void setIntroduce(String introduce) {
 		this.introduce = introduce;
 	}
+
+
+
+	
+
+
 
 	
 	

@@ -12,8 +12,6 @@ import javax.persistence.Table;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @CrossOrigin
 @Entity
@@ -24,6 +22,7 @@ public class CategoryEntity extends UrlEntitySuper{
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name="category_product",joinColumns = @JoinColumn(name="category_id"),
 	inverseJoinColumns = @JoinColumn (name="product_id"))
+
 	private List<ProductEntity> product;
 
 	
@@ -34,5 +33,11 @@ public class CategoryEntity extends UrlEntitySuper{
 	public void setProduct(List<ProductEntity> product) {
 		this.product = product;
 	}
+
+
+
+
+
+	
 	
 }

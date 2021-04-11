@@ -58,9 +58,9 @@ public class UserEntity extends BasicEntitySuper{
 	@OneToMany(mappedBy = "user")
 	private List<InvoiceEntity> invoice;
 	
-	@JsonIgnore
+	
 	@OneToOne(mappedBy = "user")
-	@JsonBackReference
+	@JsonIgnore
 	VerificationUserEntity verificationUserEntity;
 	
 	
