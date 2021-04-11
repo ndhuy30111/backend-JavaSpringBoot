@@ -14,6 +14,7 @@ import javax.validation.constraints.Min;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,7 +44,7 @@ public class ProductEntity extends UrlEntitySuper{
 	@OneToMany(targetEntity = ColorEntity.class,mappedBy  = "product",cascade=CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
 	private List<ColorEntity> color;
 	@ManyToMany(mappedBy = "product")
-	@JsonBackReference
+	@JsonIgnore
 	private List<CategoryEntity> category;
 
 	public List<CategoryEntity> getCategory() {
