@@ -48,8 +48,13 @@ public class ProductService implements ProductServiceImpl{
 	}
 
 	@Override
-	public void remove(Long id) {
+	public void remove(Long id) throws BadRequestEx{	
+		try {
 		productRepository.deleteById(id);
+		}catch (BadRequestEx e) {
+			throw new BadRequestEx("tai khoan khong hop le");
+		}
+		
 	}
 
 	@Override

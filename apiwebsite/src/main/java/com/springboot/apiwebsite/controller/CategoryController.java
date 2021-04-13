@@ -54,7 +54,7 @@ public class CategoryController {
 		CategoryEntity categoryNew = categoryService.findByIdOne(id); 
 		categoryNew.setName(categoryEntity.getName());
 		categoryService.save(categoryNew);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(categoryNew,HttpStatus.OK);
 	}
 	@PostMapping("/product")
 	public ResponseEntity<?> category_product(@Valid @RequestBody CategoryEntity categoryEntity){

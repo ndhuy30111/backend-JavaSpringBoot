@@ -50,7 +50,7 @@
 					<tr>
 						<th scope="row">Lấy thông tin user</th>
 						<td>/api/profile</td>
-						<td>profile</td>
+						<td>profileUser</td>
 						<td>GET</td>
 						<td>ghi chú : "Config Header" { headers:{ Authorization :
 							"Bearer "+ Jwt } }</td>
@@ -62,13 +62,6 @@
 						<td>POST</td>
 						<td>{ "userName" : " ", "password" : " ", "email" : " ",
 							"name" : " " }</td>
-					</tr>
-					<tr>
-						<th scope="row">Danh sách User</th>
-						<td>/api/account</td>
-						<td>getUser</td>
-						<td>GET</td>
-						<td>Không có</td>
 					</tr>
 					<tr>
 						<th scope="row">Danh sách User</th>
@@ -105,7 +98,7 @@
 					<tr>
 						<th scope="row">Xoá category</th>
 						<td>/api/category/{id}</td>
-						<td>save</td>
+						<td>deleteCategory</td>
 						<td>DELETE</td>
 						<td>Không</td>
 						<td>Cần đăng nhập</td>
@@ -113,7 +106,7 @@
 					<tr>
 						<th scope="row">Sửa category</th>
 						<td>/api/category/{id}</td>
-						<td>save</td>
+						<td>editCategory</td>
 						<td>Put</td>
 						<td>{"name": " "}</td>
 						<td>Cần đăng nhập</td>
@@ -122,8 +115,8 @@
 						<th colspan="4">===Product===</th>
 					</tr>
 					<tr>
-						<th scope="row">Danh sách category</th>
-						<td>/api/getAll</td>
+						<th scope="row">Danh sách product</th>
+						<td>/api/product</td>
 						<td>getAll</td>
 						<td>GET</td>
 						<td>?page=0&size=50</td>
@@ -137,20 +130,20 @@
 					</tr>
 					<tr>
 						<th scope="row">Lưu thông tin product</th>
-						<td>/api/category</td>
+						<td>/api/product</td>
 						<td>save</td>
 						<td>POST</td>
 						<td>Được Params theo FormData "product": { name: "", price:
 							0, discount: 0, shortIntroduction: "", introduce: "", category:
 							[], color: [ { name: "", code: "", size: [ { name: "", amount: 1,
 							}, ], image: [{"fileName":" "//ten Hình ảnh được lưu}], //ten
-							file thuoc color }, ], } "image":[]//chưa hình ảnh</td>
+							file thuoc color }, ], } "file":[]//chưa hình ảnh</td>
 						<td>Cần đăng nhập</td>
 					</tr>
 					<tr>
 						<th scope="row">Xoá Product</th>
 						<td>/api/product/{id}</td>
-						<td>save</td>
+						<td>remove</td>
 						<td>DELETE</td>
 						<td>Không</td>
 						<td>Cần đăng nhập</td>
@@ -158,11 +151,18 @@
 					<tr>
 						<th scope="row">Sửa Product</th>
 						<td>/api/product/{id}</td>
-						<td>save</td>
+						<td>update</td>
 						<td>Put</td>
 						<td>{name: "", price: 0, discount: 0, shortIntroduction: "",
 							introduce: ""}</td>
 						<td>Cần đăng nhập</td>
+					</tr>
+					<tr>
+						<th scope="row">Tìm color theo product</th>
+						<td>/api/product/{id}/color</td>
+						<td>getProductColor</td>
+						<td>GET</td>
+						<td>/api/product/{id}/color</td>
 					</tr>
 				</tbody>
 			</table>
