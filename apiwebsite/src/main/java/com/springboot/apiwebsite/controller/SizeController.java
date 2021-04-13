@@ -23,12 +23,18 @@ public class SizeController {
 	private SizeService sizeService;
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getId(@PathVariable Long id) {
-		
-		return new ResponseEntity<>(sizeService.findByIdOne(id),HttpStatus.OK);
+		SizeEntity sizeFind = sizeService.findByIdOne(id);
+		if(sizeFind==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(sizeFind,HttpStatus.OK);
 	}
 	@PutMapping("/{id}")
 	public ResponseEntity<?> putColor(@PathVariable Long id, @RequestBody SizeEntity colorEntity){
 		SizeEntity colorFind = sizeService.findByIdOne(id);
+		if(colorFind==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 		colorFind.setName(colorEntity.getName());
 		colorFind.setAmount(colorEntity.getAmount());
 		
@@ -37,6 +43,9 @@ public class SizeController {
 	}
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteColor(@PathVariable Long id){
+		if(sizeService.findByIdOne(id)==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 		sizeService.remove(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
