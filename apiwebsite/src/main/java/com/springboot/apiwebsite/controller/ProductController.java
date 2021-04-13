@@ -90,6 +90,7 @@ public class ProductController {
 	 * */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?>remove(@PathVariable("id")Long id){
+		
 		productService.remove(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

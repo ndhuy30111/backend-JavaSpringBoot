@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.apiwebsite.entity.SizeEntity;
@@ -30,6 +31,7 @@ public class SizeController {
 		return new ResponseEntity<>(sizeFind,HttpStatus.OK);
 	}
 	@PutMapping("/{id}")
+	@ResponseBody
 	public ResponseEntity<?> putColor(@PathVariable Long id, @RequestBody SizeEntity colorEntity){
 		SizeEntity colorFind = sizeService.findByIdOne(id);
 		if(colorFind==null) {
