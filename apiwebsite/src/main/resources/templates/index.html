@@ -23,149 +23,211 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Đường dẫn</th>
-						<th scope="col">Phương thức</th>
-						<th scope="col">Method</th>
-						<th scope="col">Params</th>
-						<th scope="col">Chú ý</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th colspan="4">===Authentication===</th>
-					</tr>
-					<tr>
-						<th scope="row">Đăng nhập
-						</td>
-						<td>/api/Authentication
-						</th>
-						<td>Login</td>
-						<td>POST</td>
-						<td>{ "userName" : " ", "password" : " " }</td>
-					</tr>
-					<tr>
-						<th scope="row">Lấy thông tin user</th>
-						<td>/api/profile</td>
-						<td>profile</td>
-						<td>GET</td>
-						<td>ghi chú : "Config Header" { headers:{ Authorization :
-							"Bearer "+ Jwt } }</td>
-					</tr>
-					<tr>
-						<th scope="row">Đăng ký</th>
-						<td>/api/dangky</td>
-						<td>createUser</td>
-						<td>POST</td>
-						<td>{ "userName" : " ", "password" : " ", "email" : " ",
-							"name" : " " }</td>
-					</tr>
-					<tr>
-						<th scope="row">Danh sách User</th>
-						<td>/api/account</td>
-						<td>getUser</td>
-						<td>GET</td>
-						<td>Không có</td>
-					</tr>
-					<tr>
-						<th scope="row">Danh sách User</th>
-						<td>/api/account</td>
-						<td>getUser</td>
-						<td>GET</td>
-						<td>Không có</td>
-					</tr>
-					<tr>
-						<th colspan="4">===Category===</th>
-					</tr>
-					<tr>
-						<th scope="row">Danh sách category</th>
-						<td>/api/category</td>
-						<td>getAll</td>
-						<td>GET</td>
-						<td>Không có</td>
-					</tr>
-					<tr>
-						<th scope="row">Tìm category theo url</th>
-						<td>/api/category</td>
-						<td>findOneByUrl</td>
-						<td>GET</td>
-						<td>/api/category/{url}</td>
-					</tr>
-					<tr>
-						<th scope="row">Lưu thông tin category</th>
-						<td>/api/category</td>
-						<td>save</td>
-						<td>POST</td>
-						<td>{"name": " "}</td>
-						<td>Cần đăng nhập</td>
-					</tr>
-					<tr>
-						<th scope="row">Xoá category</th>
-						<td>/api/category/{id}</td>
-						<td>save</td>
-						<td>DELETE</td>
-						<td>Không</td>
-						<td>Cần đăng nhập</td>
-					</tr>
-					<tr>
-						<th scope="row">Sửa category</th>
-						<td>/api/category/{id}</td>
-						<td>save</td>
-						<td>Put</td>
-						<td>{"name": " "}</td>
-						<td>Cần đăng nhập</td>
-					</tr>
-					<tr>
-						<th colspan="4">===Product===</th>
-					</tr>
-					<tr>
-						<th scope="row">Danh sách category</th>
-						<td>/api/getAll</td>
-						<td>getAll</td>
-						<td>GET</td>
-						<td>?page=0&size=50</td>
-					</tr>
-					<tr>
-						<th scope="row">Tìm product theo url</th>
-						<td>/api/product</td>
-						<td>findByUrl</td>
-						<td>GET</td>
-						<td>/api/product/{url}</td>
-					</tr>
-					<tr>
-						<th scope="row">Lưu thông tin product</th>
-						<td>/api/category</td>
-						<td>save</td>
-						<td>POST</td>
-						<td>Được Params theo FormData "product": { name: "", price:
-							0, discount: 0, shortIntroduction: "", introduce: "", category:
-							[], color: [ { name: "", code: "", size: [ { name: "", amount: 1,
-							}, ], image: [{"fileName":" "//ten Hình ảnh được lưu}], //ten
-							file thuoc color }, ], } "image":[]//chưa hình ảnh</td>
-						<td>Cần đăng nhập</td>
-					</tr>
-					<tr>
-						<th scope="row">Xoá Product</th>
-						<td>/api/product/{id}</td>
-						<td>save</td>
-						<td>DELETE</td>
-						<td>Không</td>
-						<td>Cần đăng nhập</td>
-					</tr>
-					<tr>
-						<th scope="row">Sửa Product</th>
-						<td>/api/product/{id}</td>
-						<td>save</td>
-						<td>Put</td>
-						<td>{name: "", price: 0, discount: 0, shortIntroduction: "",
-							introduce: ""}</td>
-						<td>Cần đăng nhập</td>
-					</tr>
-				</tbody>
-			</table>
+			<div class="table-responsive">
+				<table class="table ">
+					<thead class="table-light">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Đường dẫn</th>
+							<th scope="col">Phương thức</th>
+							<th scope="col">Method</th>
+							<th scope="col">Params</th>
+							<th scope="col">Chú ý</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th colspan="4">===Authentication===</th>
+						</tr>
+						<tr>
+							<th scope="row">Đăng nhập
+							</td>
+							<td>/api/Authentication
+							</th>
+							<td>Login</td>
+							<td>POST</td>
+							<td>{ "userName" : " ", "password" : " " }</td>
+						</tr>
+						<tr>
+							<th scope="row">Lấy thông tin user</th>
+							<td>/api/profile</td>
+							<td>profile</td>
+							<td>GET</td>
+							<td>ghi chú : "Config Header" { headers:{ Authorization :
+								"Bearer "+ Jwt } }</td>
+						</tr>
+						<tr>
+							<th scope="row">Đăng ký</th>
+							<td>/api/dangky</td>
+							<td>createUser</td>
+							<td>POST</td>
+							<td>{ "userName" : " ", "password" : " ", "email" : " ",
+								"name" : " " }</td>
+						</tr>
+						<tr>
+							<th scope="row">Danh sách User</th>
+							<td>/api/account</td>
+							<td>getUser</td>
+							<td>GET</td>
+							<td>Không có</td>
+						</tr>
+						<tr>
+							<th colspan="4">===Category===</th>
+						</tr>
+						<tr>
+							<th scope="row">Danh sách category</th>
+							<td>/api/category</td>
+							<td>getAll</td>
+							<td>GET</td>
+							<td>Không có</td>
+						</tr>
+						<tr>
+							<th scope="row">Tìm category theo url</th>
+							<td>/api/category</td>
+							<td>findOneByUrl</td>
+							<td>GET</td>
+							<td>/api/category/{url}</td>
+						</tr>
+						<tr>
+							<th scope="row">Lưu thông tin category</th>
+							<td>/api/category</td>
+							<td>save</td>
+							<td>POST</td>
+							<td>{"name": " "}</td>
+							<td>Cần đăng nhập</td>
+						</tr>
+						<tr>
+							<th scope="row">Xoá category</th>
+							<td>/api/category/{id}</td>
+							<td>save</td>
+							<td>DELETE</td>
+							<td>Không</td>
+							<td>Cần đăng nhập</td>
+						</tr>
+						<tr>
+							<th scope="row">Sửa category</th>
+							<td>/api/category/{id}</td>
+							<td>save</td>
+							<td>Put</td>
+							<td>{"name": " "}</td>
+							<td>Cần đăng nhập</td>
+						</tr>
+						<tr>
+							<th colspan="4">===Product===</th>
+						</tr>
+						<tr>
+							<th scope="row">Danh sách category</th>
+							<td>/api/getAll</td>
+							<td>getAll</td>
+							<td>GET</td>
+							<td>?page=0&size=50</td>
+						</tr>
+						<tr>
+							<th scope="row">Tìm product theo url</th>
+							<td>/api/product</td>
+							<td>findByUrl</td>
+							<td>GET</td>
+							<td>/api/product/{url}</td>
+						</tr>
+						<tr>
+							<th scope="row">Tìm color của Product theo id</th>
+							<td>/api/{id}/product</td>
+							<td>getProductColor</td>
+							<td>GET</td>
+							<td>/api/{id}/product</td>
+						</tr>
+						<tr>
+							<th scope="row">Lưu thông tin product</th>
+							<td>/api/category</td>
+							<td>save</td>
+							<td>POST</td>
+							<td>Được Params theo FormData "product": { name: "", price:
+								0, discount: 0, shortIntroduction: "", introduce: "", category:
+								[], color: [ { name: "", code: "", size: [ { name: "", amount:
+								1, }, ], image: [{"fileName":" "//ten Hình ảnh được lưu}], //ten
+								file thuoc color }, ], } "image":[]//chưa hình ảnh</td>
+							<td>Cần đăng nhập</td>
+						</tr>
+						<tr>
+							<th scope="row">Xoá Product</th>
+							<td>/api/product/{id}</td>
+							<td>save</td>
+							<td>DELETE</td>
+							<td>Không</td>
+							<td>Cần đăng nhập</td>
+						</tr>
+						<tr>
+							<th scope="row">Sửa Product</th>
+							<td>/api/product/{id}</td>
+							<td>save</td>
+							<td>Put</td>
+							<td>{"name": "", price: 0, discount: 0, shortIntroduction:
+								"", introduce: ""}</td>
+							<td>Cần đăng nhập</td>
+						</tr>
+						<tr>
+							<th colspan="4">===Color===</th>
+						</tr>
+						<tr>
+							<th scope="row">Tìm Color</th>
+							<td>/api/color/{id}</td>
+							<td>getId</td>
+							<td>GET</td>
+							<td>/api/color/{id}</td>
+						</tr>
+						<tr>
+							<th scope="row">Tìm size của Color</th>
+							<td>/api/color/{id}/size</td>
+							<td>getSize</td>
+							<td>GET</td>
+							<td>/api/color/{id}/size</td>
+						</tr>
+						<tr>
+							<th scope="row">Sửa Color</th>
+							<td>/api/color/{id}</td>
+							<td>save</td>
+							<td>Put</td>
+							<td>{"name": " " , "code" : " "}</td>
+							<td>Cần đăng nhập</td>
+						</tr>
+						<tr>
+							<th scope="row">Xoá Color</th>
+							<td>/api/color/{id}</td>
+							<td>save</td>
+							<td>Delete</td>
+							<td>/api/color/{id}</td>
+							<td>Cần đăng nhập</td>
+						</tr>
+						<tr>
+							<th colspan="4">===Size===</th>
+						</tr>
+						<tr>
+							<th scope="row">Tìm Size</th>
+							<td>/api/size/{id}</td>
+							<td>getId</td>
+							<td>GET</td>
+							<td>/api/size/{id}</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">Sửa Size</th>
+							<td>/api/size/{id}</td>
+							<td>save</td>
+							<td>Put</td>
+							<td>{"name": " " , "amount" : " "}</td>
+							<td>Cần đăng nhập</td>
+						</tr>
+						<tr>
+							<th scope="row">Xoá Size</th>
+							<td>/api/size/{id}</td>
+							<td>save</td>
+							<td>Delete</td>
+							<td>/api/size/{id}</td>
+							<td>Cần đăng nhập</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 
