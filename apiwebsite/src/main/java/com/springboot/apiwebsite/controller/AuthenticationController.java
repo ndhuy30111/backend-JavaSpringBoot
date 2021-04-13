@@ -50,7 +50,11 @@ public class AuthenticationController {
 	private VerificationEmailReponsitory verificationEmailReponsitory;
 	@Autowired
 	private SendMailService sendMailService;
-	
+	/*
+	 * Đăng nhập
+	 * @Params ( userName , password)
+	 * 
+	 * */
 	@PostMapping(value = "/api/Authentication")
 	public ResponseEntity<?>createAuthenticationToken(@Valid @RequestBody AuthenticationRequest authenticationRequest)throws Exception{
 		try {
@@ -64,6 +68,12 @@ public class AuthenticationController {
 		
 		return ResponseEntity.ok(new AuthenticationResponse(jwt));
 	}
+	/*
+	 * 
+	 * Lấy thông tin tài khoản 
+	 * @Params Theo Header Authentication 
+	 * 
+	 * */
 	@GetMapping("/api/profile")
 	public ResponseEntity<?>profileUser(){
 	 try {
@@ -78,6 +88,13 @@ public class AuthenticationController {
 	 
 	 
 	}
+	
+	/*
+	 * 
+	 * 
+	 * 
+	 * */
+	
 	@PostMapping("/api/dangky")
 	public ResponseEntity<?>createUser( @RequestBody UserEntity user) throws Exception{
 		    UserEntity userEntityNew = userService.save(user);

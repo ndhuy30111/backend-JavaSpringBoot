@@ -48,11 +48,13 @@ public class ProductService implements ProductServiceImpl{
 	}
 
 	@Override
-	public void remove(Long id) throws BadRequestEx{	
+
+	public void remove(Long id) throws BadRequestEx {
 		try {
+		productRepository.deleteForeignById(id);
 		productRepository.deleteById(id);
 		}catch (BadRequestEx e) {
-			throw new BadRequestEx("tai khoan khong hop le");
+			throw new BadRequestEx("Không thể xóa sản phẩm này!");
 		}
 		
 	}
