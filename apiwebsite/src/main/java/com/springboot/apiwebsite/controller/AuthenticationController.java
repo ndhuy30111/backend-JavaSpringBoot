@@ -110,5 +110,5 @@ public class AuthenticationController {
 		return new ResponseEntity<>(userService.findAll(),HttpStatus.OK);
 	}
 
-	}
+}
 

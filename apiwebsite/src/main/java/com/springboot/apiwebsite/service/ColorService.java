@@ -33,7 +33,7 @@ public class ColorService implements ColorServiceImpl {
 
 	@Override
 	public void remove(Long id) {
-		// TODO Auto-generated method stub
+		colorRepository.deleteById(id);
 		
 	}
 
@@ -46,7 +46,7 @@ public class ColorService implements ColorServiceImpl {
 	@Override
 	public ColorEntity findByIdOne(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return colorRepository.getOne(id);
 	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,37 +50,65 @@ public class ProductController {
 	private SizeService sizeService;
 	@Autowired
 	private CategoryService categoryService;
-
+	/*
+	 * Get: Tìm sản phẩm theo url
+	 * */
 	@GetMapping("/{url}")
 	public ResponseEntity<?> findByUrl(@PathVariable String url) {
 		return new ResponseEntity<>(productService.findtByUrlOne(url), HttpStatus.OK);
 	}
-
+	/*
+	 * Get: Tất cả , Page Trang , Size Kích thước sản phẩm nhận về.
+	 * 
+	 * */
 	@GetMapping
 	public ResponseEntity<?> getAll(@Valid @RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "5") int size) {
+			@RequestParam(defaultValue = "50") int size) {
 		return new ResponseEntity<>(productService.findPage(page, size), HttpStatus.OK);
 	}
-
+	/*
+	 * Put: Sửa sản phẩm
+	 * */
 	@PutMapping("/{id}")
 	public ResponseEntity<?> update(@RequestBody ProductEntity productEntity, @PathVariable("id") Long id)
 			throws ProductEx {
 		{
-			return new ResponseEntity<>(productService.save(productEntity), HttpStatus.OK);
+			ProductEntity productNew = productService.findByIdOne(id);
+			productNew.setName(productEntity.getName());
+			productNew.setPrice(productEntity.getPrice());
+			productNew.setDiscount(productEntity.getDiscount());
+			productNew.setShortIntroduction(productEntity.getShortIntroduction());
+			productNew.setIntroduce(productEntity.getIntroduce());
+			return new ResponseEntity<>(productService.save(productNew), HttpStatus.OK);
 		}
 	}
-
+	
+	/*
+	 * 
+	 * Delete: Xoá sản phẩm
+	 * 
+	 * */
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?>remove(@PathVariable("id")Long id){
+		productService.remove(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	/*
+	 * 
+	 *Post: Thêm sản phâmmr
+	 * 
+	 * */
 	@PostMapping
 	@Transactional(rollbackFor = BadRequestEx.class)
 	public ResponseEntity<?> save(@RequestParam(value = "product") String product,
 			@RequestParam(name = "file", required = true) MultipartFile[] file)
 			throws Exception, ValidationException, ValidationException ,BadRequestEx{
 		try {
-		
 			ProductEntity productEntity = new ObjectMapper().readValue(product, ProductEntity.class);
 			List<CategoryEntity> listCategory = productEntity.getCategory();
 			if(productService.findOneByName(productEntity.getName())==null) {
 				ProductEntity productnew = productService.save(productEntity);
+				//Thêm Sản phẩm vào danh mục
 					for(CategoryEntity categoryEntity : listCategory) {
 						CategoryEntity categoryFind = categoryService.findByIdOne(categoryEntity.getId());
 						if(categoryFind!=null) {
@@ -88,14 +117,17 @@ public class ProductController {
 						}
 					}
 				try {
+					// Lưu thông tin màu sắc
 					for (ColorEntity itemColor : productnew.getColor()) {
 						itemColor.setProduct(productnew);
 						ColorEntity colorNew = colorService.save(itemColor);
+						//Lưu thông tin kích thước của màu sắc
 						for (SizeEntity itemSize : colorNew.getSize()) {
 							itemSize.setColor(colorNew);
 							sizeService.save(itemSize);
 						}
 						try {
+							// Lưu File hình theo màu sắc
 							for (MultipartFile itemFile : file) {
 								if(itemFile==null) {
 									return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -127,6 +159,10 @@ public class ProductController {
 
 		}
 		return new ResponseEntity<>(new BadRequestEx("Trùng tên sản phẩm"),HttpStatus.BAD_REQUEST);
+	}
+	@GetMapping("/{id}/color")
+	public ResponseEntity <?>getProductColor(@PathVariable Long id){
+		return new ResponseEntity<>(productService.findByIdOne(id).getColor(),HttpStatus.OK);
 	}
 
 }

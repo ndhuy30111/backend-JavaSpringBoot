@@ -47,7 +47,7 @@ public class CategoryService implements CategoryServiceImpl {
 
 	@Override
 	public void remove(Long id) {
-		// TODO Auto-generated method stub
+		categoryRepository.deleteById(id);
 
 	}
 

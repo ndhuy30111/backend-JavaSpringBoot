@@ -34,7 +34,7 @@ public class SizeService implements SizeServiceImpl {
 	@Override
 	public void remove(Long id) {
 		// TODO Auto-generated method stub
-		
+		sizeReponsitory.deleteById(id);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class SizeService implements SizeServiceImpl {
 	@Override
 	public SizeEntity findByIdOne(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return sizeReponsitory.getOne(id);
 	}
 
 }
