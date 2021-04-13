@@ -46,7 +46,7 @@ public class SizeService implements SizeServiceImpl {
 	@Override
 	public SizeEntity findByIdOne(Long id) {
 		// TODO Auto-generated method stub
-		return sizeReponsitory.getOne(id);
+		return sizeReponsitory.findById(id).get();
 	}
 
 }

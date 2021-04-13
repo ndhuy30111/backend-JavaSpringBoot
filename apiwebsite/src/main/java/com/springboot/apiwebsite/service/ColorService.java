@@ -27,7 +27,7 @@ public class ColorService implements ColorServiceImpl {
 
 	@Override
 	public ColorEntity save(ColorEntity t) {
-		// TODO Auto-generated method stub
+	
 		return colorRepository.save(t);
 	}
 
@@ -46,7 +46,7 @@ public class ColorService implements ColorServiceImpl {
 	@Override
 	public ColorEntity findByIdOne(Long id) {
 		// TODO Auto-generated method stub
-		return colorRepository.getOne(id);
+		return colorRepository.findById(id).get();
 	}
 
 }

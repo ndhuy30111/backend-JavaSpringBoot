@@ -89,16 +89,11 @@ public class ProductController {
 	 * 
 	 * */
 	@DeleteMapping("/{id}")
-	@Transactional(rollbackFor = BadRequestEx.class)
-	public ResponseEntity<?>remove(@PathVariable("id")Long id) throws BadRequestEx{		
-		try
-		{
-			productService.remove(id);
-			return new ResponseEntity<>(HttpStatus.OK);
-		}catch(BadRequestEx e)
-		{
-			return new ResponseEntity<>(new BadRequestEx("Không thể xóa sản phẩm này!"),HttpStatus.BAD_REQUEST);
-		}		
+	public ResponseEntity<?>remove(@PathVariable("id")Long id){
+		
+		productService.remove(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+
 	}
 	/*
 	 * 

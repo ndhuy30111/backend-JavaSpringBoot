@@ -25,7 +25,7 @@ public class ColorEntity extends UrlEntitySuper{
 	@JoinColumn(columnDefinition = "product_id")
 	@JsonIgnore
 	private ProductEntity product;
-	@OneToMany(targetEntity = SizeEntity.class,mappedBy = "color",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(targetEntity = SizeEntity.class,mappedBy = "color",cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<SizeEntity> size;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name="color_image",joinColumns = @JoinColumn(name="color_id"),
