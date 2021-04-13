@@ -31,13 +31,9 @@ public class ColorEntity extends UrlEntitySuper{
 	@JoinTable(name="color_image",joinColumns = @JoinColumn(name="color_id"),
 	inverseJoinColumns = @JoinColumn (name="image_id"))
 	private List<UploadFileEntity>image = new ArrayList<>();
-	
-	
-
 	public String getCode() {
 		return code;
 	}
-
 	public void setCode(String code) {
 		this.code = code;
 	}

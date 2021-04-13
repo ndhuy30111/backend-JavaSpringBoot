@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -45,7 +44,7 @@ public class ProductEntity extends UrlEntitySuper{
 	private List<InvoiceDetailsEntity> invoiceDetails;
 	@OneToMany(targetEntity = ColorEntity.class,mappedBy  = "product",cascade=CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
 	private List<ColorEntity> color;
-	@ManyToMany(mappedBy = "product",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+	@ManyToMany(mappedBy = "product",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	private List<CategoryEntity> category;
 	@JsonBackReference
 	public List<CategoryEntity> getCategory() {

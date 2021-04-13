@@ -18,4 +18,6 @@ public interface ProductRepository  extends JpaRepository<ProductEntity, Long> {
 	@Query(value="SELECT * FROM product p WHERE p.name LIKE %?1%",nativeQuery = true)
 	List<ProductEntity> findByNameLike(String name);
 	ProductEntity findOneByName(String name);
+	@Query(value="DELETE FROM category_product WHERE product_id = ?1",nativeQuery=true)
+	void deleteForeignById(Long id);
 }

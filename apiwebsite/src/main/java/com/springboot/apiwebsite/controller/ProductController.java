@@ -74,6 +74,10 @@ public class ProductController {
 			throws ProductEx {
 		{
 			ProductEntity productNew = productService.findByIdOne(id);
+			if(productNew==null) {
+
+				return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+			}
 			productNew.setName(productEntity.getName());
 			productNew.setPrice(productEntity.getPrice());
 			productNew.setDiscount(productEntity.getDiscount());
@@ -90,7 +94,11 @@ public class ProductController {
 	 * */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?>remove(@PathVariable("id")Long id){
-		
+		ProductEntity product = productService.findByIdOne(id);
+		if(product==null) {
+
+			return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+		}
 		productService.remove(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
@@ -161,6 +169,9 @@ public class ProductController {
 		}
 		return new ResponseEntity<>(new BadRequestEx("Trùng tên sản phẩm"),HttpStatus.BAD_REQUEST);
 	}
+	/*
+	 * Tìm Kiếm Color Của Product
+	 * */
 	@GetMapping("/{id}/color")
 	public ResponseEntity <?>getProductColor(@PathVariable Long id){
 		return new ResponseEntity<>(productService.findByIdOne(id).getColor(),HttpStatus.OK);

@@ -49,6 +49,7 @@ public class ProductService implements ProductServiceImpl{
 
 	@Override
 	public void remove(Long id) {
+		productRepository.deleteForeignById(id);
 		productRepository.deleteById(id);
 	}
 
