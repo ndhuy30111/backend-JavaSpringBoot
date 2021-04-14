@@ -36,8 +36,7 @@ public class ColorController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		colorFind.setName(colorEntity.getName());
-		colorFind.setCode(colorEntity.getCode());
-		
+		colorFind.setCode(colorEntity.getCode());	
 		colorService.save(colorFind);
 		return new ResponseEntity<>(colorFind,HttpStatus.OK);
 	}

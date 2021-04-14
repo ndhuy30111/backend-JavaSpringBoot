@@ -32,7 +32,7 @@ public class SizeController {
 	}
 	@PutMapping("/{id}")
 	@ResponseBody
-	public ResponseEntity<?> putColor(@PathVariable Long id, @RequestBody SizeEntity colorEntity){
+	public ResponseEntity<?> putSize(@PathVariable Long id, @RequestBody SizeEntity colorEntity){
 		SizeEntity colorFind = sizeService.findByIdOne(id);
 		if(colorFind==null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -44,7 +44,7 @@ public class SizeController {
 		return new ResponseEntity<>(colorFind,HttpStatus.OK);
 	}
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deleteColor(@PathVariable Long id){
+	public ResponseEntity<?> deleteSize(@PathVariable Long id){
 		if(sizeService.findByIdOne(id)==null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

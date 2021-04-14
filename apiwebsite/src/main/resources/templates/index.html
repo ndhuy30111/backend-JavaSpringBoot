@@ -99,7 +99,7 @@
 						<tr>
 							<th scope="row">Xoá category</th>
 							<td>/api/category/{id}</td>
-							<td>save</td>
+							<td>deleteCategory</td>
 							<td>DELETE</td>
 							<td>Không</td>
 							<td>Cần đăng nhập</td>
@@ -107,7 +107,7 @@
 						<tr>
 							<th scope="row">Sửa category</th>
 							<td>/api/category/{id}</td>
-							<td>save</td>
+							<td>editCategory</td>
 							<td>Put</td>
 							<td>{"name": " "}</td>
 							<td>Cần đăng nhập</td>
@@ -116,11 +116,18 @@
 							<th colspan="4">===Product===</th>
 						</tr>
 						<tr>
-							<th scope="row">Danh sách category</th>
+							<th scope="row">Danh sách product</th>
 							<td>/api/getAll</td>
 							<td>getAll</td>
 							<td>GET</td>
 							<td>?page=0&size=50</td>
+						</tr>
+						<tr>
+							<th scope="row">Tìm kiếm product</th>
+							<td>/api/search/product/{name}</td>
+							<td>findByName</td>
+							<td>GET</td>
+							<td>{name}</td>
 						</tr>
 						<tr>
 							<th scope="row">Tìm product theo url</th>
@@ -151,7 +158,7 @@
 						<tr>
 							<th scope="row">Xoá Product</th>
 							<td>/api/product/{id}</td>
-							<td>save</td>
+							<td>remove</td>
 							<td>DELETE</td>
 							<td>Không</td>
 							<td>Cần đăng nhập</td>
@@ -159,7 +166,7 @@
 						<tr>
 							<th scope="row">Sửa Product</th>
 							<td>/api/product/{id}</td>
-							<td>save</td>
+							<td>update</td>
 							<td>Put</td>
 							<td>{"name": "", price: 0, discount: 0, shortIntroduction:
 								"", introduce: ""}</td>
@@ -185,7 +192,7 @@
 						<tr>
 							<th scope="row">Sửa Color</th>
 							<td>/api/color/{id}</td>
-							<td>save</td>
+							<td>putColor</td>
 							<td>Put</td>
 							<td>{"name": " " , "code" : " "}</td>
 							<td>Cần đăng nhập</td>
@@ -193,7 +200,7 @@
 						<tr>
 							<th scope="row">Xoá Color</th>
 							<td>/api/color/{id}</td>
-							<td>save</td>
+							<td>deleteColor</td>
 							<td>Delete</td>
 							<td>/api/color/{id}</td>
 							<td>Cần đăng nhập</td>
@@ -212,7 +219,7 @@
 						<tr>
 							<th scope="row">Sửa Size</th>
 							<td>/api/size/{id}</td>
-							<td>save</td>
+							<td>putSize</td>
 							<td>Put</td>
 							<td>{"name": " " , "amount" : " "}</td>
 							<td>Cần đăng nhập</td>
@@ -220,7 +227,7 @@
 						<tr>
 							<th scope="row">Xoá Size</th>
 							<td>/api/size/{id}</td>
-							<td>save</td>
+							<td>deleteSize</td>
 							<td>Delete</td>
 							<td>/api/size/{id}</td>
 							<td>Cần đăng nhập</td>
